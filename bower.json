@@ -1,0 +1,20 @@
+{
+  "name": "foundation",
+  "version": "0.0.2",
+  "homepage": "https://github.com/darcys22/guana-cobra",
+  "authors": [
+    "Sean Darcy <darcys22@gmail.com>"
+  ],
+  "description": "foundation app",
+  "moduleType": [
+    "node"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "angular": "~1.4.0",
+    "angular-route": "~1.4.0",
+    "angular-loader": "~1.4.0",
+    "angular-mocks": "~1.4.0",
+    "html5-boilerplate": "~5.2.0"
+  }
+}
