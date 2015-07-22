@@ -1,5 +1,6 @@
 // modules =================================================
 var express        = require('express');
+var http           = require('http');
 var app            = express();
 var mongoose       = require('mongoose');
 var bodyParser     = require('body-parser');
@@ -25,6 +26,9 @@ app.use(express.static(__dirname + '/public')); // set the static files location
 require('./app/routes')(app); // pass our application into our routes
 
 // start app ===============================================
-app.listen(port);	
-console.log('Magic happens on port ' + port); 			// shoutout to the user
+var server = http.createServer(app);
+
+server.listen(port, function() {
+  console.log('Magic happens on port ' + port); 			// shoutout to the user
+});
 exports = module.exports = app; 						// expose app

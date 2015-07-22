@@ -4,7 +4,7 @@
   "description": "Book review site for the end of the world",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "supervisor -e 'html|js' node server.js"
   },
   "keywords": [
     "book",
@@ -17,5 +17,7 @@
     "express": "^4.13.1",
     "method-override": "^2.3.4",
     "mongoose": "^4.0.8"
+  },
+  "devDependencies": {
   }
 }
