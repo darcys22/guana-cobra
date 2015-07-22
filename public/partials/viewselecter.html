@@ -1,0 +1,14 @@
+<div class="navbar">
+  <ul class="nav navbar-nav">
+    <li data-ng-class="{active: !listDisplayModeEnabled}" class="toolbaritem">
+      <a data-ng-click="changeDisplayMode(DisplayModeEnum.Cover)">
+        <span class="glyphicon glyphicon-th-large"></span> Cover View
+      </a>
+    </li>
+    <li data-ng-class="{active: listDisplayModeEnabled}" class="toolbaritem">
+      <a data-ng-click="changeDisplayMode(DisplayModeEnum.List)">
+        <span class="glyphicon glyphicon-align-justify"></span> List View
+      </a>
+    </li>
+  </ul>
+</div>

@@ -1,0 +1,28 @@
+<div class="customers view indent">
+  
+  <div class="flexsearch">
+      <div class="flexsearch--wrapper">
+          <div class="flexsearch--input-wrapper">
+            <nit-advanced-searchbox ng-model="query" focus="focus" parameters="availableSearchParams" placeholder="Add Books..."></nit-advanced-searchbox>
+          </div>
+      </div>
+  </div>
+
+  <br>
+    
+  <ul class="booksearch container" ng-show="searchReturn">
+    <li ng-repeat="book in searchResults"
+        class="thumbnail">
+      <a href="">{{book.title}}</a>
+      <p>{{book.author}}</p>
+    </li>
+  </ul> 
+
+  <div ng-hide="searchReturn">
+    <div class="pgn">
+      <view-selecter></view-selecter>
+      <list-view></list-view>
+    </div>
+    <cover-view></cover-view>
+  </div>
+</div>

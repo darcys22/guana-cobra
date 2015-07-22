@@ -1,0 +1,132 @@
+.book-list {
+  margin-bottom: 15px;
+}
+
+.book-list li {
+  height: 195px;
+  width: 132px;
+  padding: 0;
+  display: inline-block;
+  margin: 12px;
+  border-radius: 3px;
+  position: relative;
+  background: #000;
+}
+
+.book-list li:hover i {
+  opacity: 1;
+}
+
+.book-list li i {
+  background: rgba(0, 0, 0, 0.4);
+  color: #FFF;
+  display: block;
+  position: absolute;
+  bottom: 0;
+  line-height: 195px;
+  right: 0;
+  top: 0;
+  left: 0;
+  text-align: center;
+  font-size: 60px;
+  opacity: 1;
+  width: 101%;
+  height: 101%;
+  z-index: 10;
+}
+
+.book-list li .cover {
+  width: 133px;
+  height: 196px;
+  overflow: hidden;
+  display: block;
+  margin: 0 0 10px 0;
+  border-radius: 3px;
+  background: url(../images/posterholder.png) no-repeat 50% 50%;
+  -webkit-transform: translateZ(0);
+}
+
+.rank {
+    z-index: 15;
+    position: absolute;
+
+    width: 36px;
+    height: 36px;
+    padding: 5px;
+    
+    color: #666;
+    text-align: center;
+    
+    font: 32px Arial, sans-serif;
+}
+
+.book-list li img {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  border-radius: 3px;
+  -webkit-transform: translateZ(0);
+}
+
+.book-list li img.placeholder {
+  -webkit-filter: grayscale(1);
+  -webkit-transform: scale(1.15) translateY(-5px);
+  z-index: 1;
+  border-radius: 3px;
+}
+
+.book-list li img.real {
+  opacity: 1;
+  z-index: 2;
+  border-radius: 3px;
+}
+
+.book-list li img.hidden {
+  opacity: 0;
+  visibility: hidden;
+  border-radius: 3px;
+}
+
+.book-list li a {
+  display: block;
+  height: 196px;
+  width: 133px;
+}
+
+.book-list li strong {
+  color: #FFF;
+  display: block;
+  font-weight: bold;
+  font-size: 14px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.book-list li small {
+  font-size: 12px;
+  color: #666;
+}
+
+.book-list li::before {
+  display: block;
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  box-shadow: inset 0px 1px 0px rgba(255, 255, 255, 0.15), 0 2px 3px rgba(0, 0, 0, 0.3);
+  border-radius: 3px;
+  border: 1px solid #000;
+  z-index: 3;
+}
+
+.pgn {
+  margin: 0 38px;
+}
+
+
+

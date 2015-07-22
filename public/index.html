@@ -1,15 +1,89 @@
- <!-- public/views/index.html -->
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en" ng-app="myApp" class="no-js"> <!--<![endif]-->
 
-    <title>Starter MEAN Single Page Application</title>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Foundation</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/normalize.css">
+  <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/main.css">
+  <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+
+  <!--searchbar stuff-->
+  <link rel="stylesheet" href="assets/css/angular-advanced-searchbox.css">
+  <link rel="stylesheet" href="assets/css/searchbar.css">
+  
+  <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
+  <link rel="stylesheet" href="assets/css/coverlist.css">
+  <link rel="stylesheet" href="assets/css/app.css">
+
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css">
+
 
 </head>
-<body>
+<body ng-cloak>
+  <!--[if lt IE 7]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+  <![endif]-->
 
-    we did it! maybe
+  <header class="navbar navbar-static-top navbar-default">
+    <div class="container">
+      <div class="navbar-header">
+        <a class="text-danger navbar-brand" href="#/landing">FOUNDATION</a>
+      </div>
 
+      <div class="nav-container">
+
+        <ul class="nav navbar-nav nav-pills navBarPadding"
+          menu-highlighter highlight-class-name="active">
+
+          <li><a href="#/mybooks">My Books</a></li>
+          <li><a href="#/hordemind">Horde Mind</a></li>
+
+        </ul>
+      </div>
+    </div>
+  </header>
+
+
+  <div ng-view></div>
+
+
+  <!-- In production use:
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
+  -->
+  <script src="//code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="assets/js/evercookie.js"></script>
+  <script src="assets/js/swfobject-2.2.min.js"></script>
+  <script src="bower_components/angular/angular.js"></script>
+  <script src="bower_components/angular-route/angular-route.js"></script>
+  <script src="app.js"></script>
+  <script src="landing/landing.js"></script>
+  <script src="hordemind/hordemind.js"></script>
+  <script src="mybooks/mybooks.js"></script>
+  <script src="services/getter.js"></script>
+  <script src="services/parentcontroller.js"></script>
+  <script src="partials/partialdirectives.js"></script>
+  <script src="assets/js/ui-bootstrap-tpls-0.13.0.min.js"></script>
+  <script src="assets/js/angular-advanced-searchbox.js"></script>
+  
 </body>
+
+<div id="footer">
+  <p class="darcy">The ashes of our existence will fertilize the soil for the universe to follow.</p>
+  <p class="copyright">
+    Copyright © 2015
+    <strong>Sean Darcy</strong>
+    <br>
+    Powered by
+    <a href="https://angularjs.org/">AngularJS</a>
+    <!--<span>|</span>-->
+  </p>
+</div>
 </html>
