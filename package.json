@@ -1,0 +1,21 @@
+{
+  "name": "foundation",
+  "version": "0.0.2",
+  "description": "Book review site for the end of the world",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "book",
+    "review"
+  ],
+  "author": "Sean Darcy",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.13.2",
+    "express": "^4.13.1",
+    "method-override": "^2.3.4",
+    "mongoose": "^4.0.8"
+  }
+}
