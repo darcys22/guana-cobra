@@ -6,10 +6,11 @@
 
     $scope.userid = "c4ca4238a0b923820dcc509a6f75849b";
 
-    try {
+    //try {
       var ec = new evercookie();
+      //ec.set("id", "12345");
       ec.get("id", function(value) { alert("Cookie value is " + value) });
-    } catch(e) {};
+    //} catch(e) {};
 
     controllerService($scope);
 
