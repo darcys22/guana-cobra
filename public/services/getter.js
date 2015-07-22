@@ -7,7 +7,7 @@
 
       getTopBooks: function() {
         var deferred = $q.defer();
-        $http.get('assets/generated.json')
+        $http.get('/api/top')
           .success(function(data) {
             deferred.resolve(data);
           }).error(function(data) {
@@ -18,7 +18,7 @@
 
       getMyBooks: function() {
         var deferred = $q.defer();
-        $http.get('assets/generated.json')
+        $http.get('/api/top')
           .success(function(data) {
             deferred.resolve(data);
           }).error(function(data) {
@@ -29,7 +29,7 @@
 
       searchBooks: function(query) {
         var deferred = $q.defer();
-        $http.get('assets/generated.json')
+        $http.get('/api/top')
           .success(function(data) {
             deferred.resolve($filter('limitTo')(data, 5, Math.random() * data.length));
           }).error(function(data) {
