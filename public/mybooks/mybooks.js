@@ -1,27 +1,31 @@
 (function () {
+  
+  var injectParams = ['$scope', '$rootScope', 'controllerService', 'bookService'];
 
-  var injectParams = ['$scope', 'controllerService', 'bookService'];
-
-  var MybooksController = function($scope, controllerService, bookService) {
-
-    $scope.userid = "c4ca4238a0b923820dcc509a6f75849b";
-
-    //try {
-      var ec = new evercookie();
-      //ec.set("id", "12345");
-      ec.get("id", function(value) { alert("Cookie value is " + value) });
-    //} catch(e) {};
+  var MybooksController = function($scope, $rootScope, controllerService, bookService) {
 
     controllerService($scope);
 
     // The books themselves
+    $scope.books = []
+    $scope.loading = true;
 
-    $scope.books = bookService.getMyBooks();
-    $scope.books.then(function (books) {
-      $scope.books = books;
-    }, function (status) {
-      console.log(status);
-    });
+    $scope.$watch ($rootScope.cookieReady,
+      function(newVal) {
+        if (newVal) {
+          $scope.$apply(function () {
+            $scope.books = bookService.getMyBooks($rootScope.userid);
+            $scope.books.then(function (books) {
+              $scope.loading = false;
+              $scope.books = books;
+            }, function (status) {
+              console.log(status);
+            });
+          })
+        }
+      }
+    );
+
 
     $scope.availableSearchParams = [
       { key: "title", name: "Title", placeholder: "Title..." },

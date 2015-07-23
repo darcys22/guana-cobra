@@ -9,7 +9,8 @@
   </div>
 
   <br>
-    
+
+
   <ul class="booksearch container" ng-show="searchReturn">
     <li ng-repeat="book in searchResults"
         class="thumbnail">
@@ -21,6 +22,7 @@
   <div ng-hide="searchReturn">
     <div class="pgn">
       <view-selecter></view-selecter>
+      <img ng-show="loading" ng-src="assets/images/preloader.gif" alt="preloader" class="text-center"></img>
       <list-view></list-view>
     </div>
     <cover-view></cover-view>
