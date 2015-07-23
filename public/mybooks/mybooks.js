@@ -10,21 +10,13 @@
     $scope.books = []
     $scope.loading = true;
 
-    $scope.$watch ($rootScope.cookieReady,
-      function(newVal) {
-        if (newVal) {
-          $scope.$apply(function () {
-            $scope.books = bookService.getMyBooks($rootScope.userid);
-            $scope.books.then(function (books) {
-              $scope.loading = false;
-              $scope.books = books;
-            }, function (status) {
-              console.log(status);
-            });
-          })
-        }
-      }
-    );
+    $scope.books = bookService.getMyBooks($rootScope.userId);
+    $scope.books.then(function (books) {
+      $scope.loading = false;
+      $scope.books = books;
+    }, function (status) {
+      console.log(status);
+    });
 
 
     $scope.availableSearchParams = [

@@ -4,6 +4,7 @@
 // Declare app level module which depends on views, and components
 var myApp = angular.module('myApp', [
     'ngRoute',
+    'ngCookies',
     'ui.bootstrap',
     'myApp.landing',
     'myApp.mybooks',
@@ -21,21 +22,12 @@ config(['$routeProvider', function($routeProvider) {
 
 }]).
 
-run(['$rootScope', function($rootScope) {
+run(['$rootScope', '$cookieStore',
+    function($rootScope, $cookieStore) {
 
-    var ec = new evercookie({silverlight: false});
-    var cookieService = "c4ca4238a0b923820dcc509a6f75849b";
-    $rootScope.cookieReady = false;
+      var cookieService = 'c4ca4238a0b923820dcc509a6f75849b';
+      $rootScope.userId = $cookieStore.get('current.user') || cookieService;
 
-    ec.get("id", function(value) {
-      $rootScope.cookieReady = true;
-      if (value) {
-        $rootScope.userid = value;
-      } else {
-        $rootScope.userid = cookieService;
-        ec.set("id", $rootScope.userid);
-      }
-    });
 }]);
 
 
