@@ -19,6 +19,15 @@ module.exports = function(app) {
     res.sendfile('./app/models/generated.json');
   });
 
+  app.get('/api/users/:id', function(req, res) {
+    res.sendfile('./app/models/generated.json');
+  });
+  
+  app.get('/api/search', function(req, res) {
+    //deferred.resolve($filter('limitTo')(data, 5, Math.random() * data.length));
+    res.sendfile('./app/models/generated.json');
+  });
+
 
 	// frontend routes =========================================================
 	// route to handle all angular requests

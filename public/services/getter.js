@@ -16,9 +16,9 @@
           return deferred.promise;
         },
 
-      getMyBooks: function() {
+      getMyBooks: function(userId) {
         var deferred = $q.defer();
-        $http.get('/api/top')
+        $http.get('/api/users/' + userId)
           .success(function(data) {
             deferred.resolve(data);
           }).error(function(data) {
@@ -31,6 +31,7 @@
         var deferred = $q.defer();
         $http.get('/api/top')
           .success(function(data) {
+            //deferred.resolve(data);
             deferred.resolve($filter('limitTo')(data, 5, Math.random() * data.length));
           }).error(function(data) {
             deferred.reject(data);
