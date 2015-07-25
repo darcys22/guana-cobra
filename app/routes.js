@@ -25,7 +25,9 @@ module.exports = function(app) {
   
   app.get('/api/search', function(req, res) {
     //deferred.resolve($filter('limitTo')(data, 5, Math.random() * data.length));
-    res.sendfile('./app/models/generated.json');
+    
+    var Search = require('./models/Search.js');
+    res.sendfile(Search('hello'));
   });
 
 

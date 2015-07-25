@@ -29,7 +29,7 @@
 
       searchBooks: function(query) {
         var deferred = $q.defer();
-        $http.get('/api/top')
+        $http.get('/api/search')
           .success(function(data) {
             //deferred.resolve(data);
             deferred.resolve($filter('limitTo')(data, 5, Math.random() * data.length));

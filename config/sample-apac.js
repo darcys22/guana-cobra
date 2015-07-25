@@ -1,4 +1,5 @@
 module.exports = {
-      accessKey: '',
-      secretKey: ''
+      accessKey : '',
+      secretKey : '',
+      assocID   : ''
 }
