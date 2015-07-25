@@ -8,7 +8,6 @@ var myApp = angular.module('myApp', [
     'ui.bootstrap',
     'myApp.landing',
     'myApp.mybooks',
-    'cookieService',
     'angular-advanced-searchbox',
     'myApp.hordemind'
 ]).
@@ -24,10 +23,12 @@ config(['$routeProvider', function($routeProvider) {
 }]).
 
 run(['$rootScope', '$cookies', 'cookieService',
-    function($rootScope, $cookies, cookieService) {
+  function($rootScope, $cookies, cookieService) {
 
-      $rootScope.userId = $cookies.get('current.user') || cookieService.newCookie();
+    $rootScope.userId = $cookies.get('current.user') || cookieService.newCookie();
 
 }]);
+
+
 
 
