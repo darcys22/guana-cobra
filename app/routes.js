@@ -24,10 +24,12 @@ module.exports = function(app) {
   });
   
   app.get('/api/search', function(req, res) {
-    //deferred.resolve($filter('limitTo')(data, 5, Math.random() * data.length));
     
     var Search = require('./models/Search.js');
-    res.json(Search('hello'));
+    Search('hello', function(data) {
+      res.json(JSON.stringify(data));
+    });
+    //res.json(Search('hello'));
   });
 
 

@@ -39,7 +39,7 @@
 
 
 
-  var query = function ( queryObject ) {
+  var query = function ( queryObject , callback ) {
     
         opHelper.execute('ItemSearch', {
             'SearchIndex': 'Books',
@@ -47,7 +47,7 @@
             'ResponseGroup': 'ItemAttributes, Images'
         }, function(error, results) {
             if (results.ItemSearchResponse.Error) { console.log('Error: ' + results.ItemSearchResponse.Error + "\n"); }
-            return jsBuilder(arrayLocator(results));
+            callback(jsBuilder(arrayLocator(results)));
         });
 
   };

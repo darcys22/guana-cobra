@@ -14,8 +14,8 @@
   <ul class="booksearch container" ng-show="searchReturn">
     <li ng-repeat="book in searchResults"
         class="thumbnail">
-      <a href="">{{book.title}}</a>
-      <p>{{book.author}}</p>
+        <a target="_blank" ng-href="{{book.URL | trusted }}">{{book.Title}}</a>
+      <p>{{book.Author}}</p>
     </li>
   </ul> 
 

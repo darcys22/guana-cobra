@@ -55,7 +55,7 @@
       if (validSearch(value)) {
           $scope.searchResults = bookService.searchBooks(value);
           $scope.searchResults.then(function (books) {
-            $scope.searchResults = books;
+            $scope.searchResults = JSON.parse(books);
             $scope.searchReturn = true;
           }, function (status) {
             console.log(status);

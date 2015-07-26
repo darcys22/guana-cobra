@@ -31,8 +31,8 @@
         var deferred = $q.defer();
         $http.get('/api/search')
           .success(function(data) {
-            //deferred.resolve(data);
-            deferred.resolve($filter('limitTo')(data, 5, Math.random() * data.length));
+            deferred.resolve(data);
+            //deferred.resolve($filter('limitTo')(data, 5, Math.random() * data.length));
           }).error(function(data) {
             deferred.reject(data);
           });
