@@ -27,7 +27,7 @@ module.exports = function(app) {
     //deferred.resolve($filter('limitTo')(data, 5, Math.random() * data.length));
     
     var Search = require('./models/Search.js');
-    res.sendfile(Search('hello'));
+    res.json(Search('hello'));
   });
 
 

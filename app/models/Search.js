@@ -10,21 +10,58 @@
       assocId: apacCredentials.assocID 
   });
 
+  var responseBuilder = function (amazonBook) {
+      return {
+        URL:      amazonBook.DetailPageURL[0], //String of Link to amazon
+        Title:    amazonBook.ItemAttributes[0].Title[0], //String of Title
+        Author:   amazonBook.ItemAttributes[0].Author[0], //String of Author
+        Img:      amazonBook.LargeImage[0].URL[0] //ImageURL
+      }
+  };
+
+  var jsBuilder = function (resultsArray) {
+
+    var returnNumber = 5;
+    var unformattedArray = resultsArray.splice(0, returnNumber);
+    var index;
+    var ret = [];
+
+    for (index = 0; index < resultsArray.length; ++index) {
+      ret.push(responseBuilder(unformattedArray[index]));
+    }
+
+    return ret;
+  };
+
+  var arrayLocator = function (rawResults) {
+    return rawResults.ItemSearchResponse.Items[0].Item;
+  };
+
+
 
   var query = function ( queryObject ) {
     
         opHelper.execute('ItemSearch', {
             'SearchIndex': 'Books',
             'Keywords': 'harry potter',
-            'ResponseGroup': 'ItemAttributes,Offers'
+            'ResponseGroup': 'ItemAttributes, Images'
         }, function(error, results) {
-            if (error) { console.log('Error: ' + error + "\n"); }
-            console.log("Results:\n" + util.inspect(results) + "\n");
+            if (results.ItemSearchResponse.Error) { console.log('Error: ' + results.ItemSearchResponse.Error + "\n"); }
+            return jsBuilder(arrayLocator(results));
         });
 
-        return './app/models/generated.json'
   };
 
   module.exports = query;
 
 })();
+
+//results.ItemSearchResponse.Items[0].Item[0] ---First Result
+//
+//results.ItemSearchResponse.Items[0].Item[0].DetailPageURL[0] -- String of Link to amazon
+//results.ItemSearchResponse.Items[0].Item[0].ItemAttributes[0].Title[0] -- String of Title
+//results.ItemSearchResponse.Items[0].Item[0].ItemAttributes[0].Author[0] -- String of Author
+//results.ItemSearchResponse.Items[0].Item[0].LargeImage[0].URL[0] -- ImageURL
+//
+//
+//results.ItemSearchResponse.Error - Error
