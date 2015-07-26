@@ -57,6 +57,7 @@
           $scope.searchResults.then(function (books) {
             $scope.searchResults = JSON.parse(books);
             $scope.searchReturn = true;
+            $scope.focus = false;
           }, function (status) {
             console.log(status);
           });
