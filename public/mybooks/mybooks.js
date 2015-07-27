@@ -18,6 +18,15 @@
       console.log(status);
     });
 
+    $scope.addBook = function(bookID) {
+      var newBook = bookService.addBookToUser($rootScope.userId, bookID);
+      newBook.then(function (res) {
+        $scope.query = {};
+        $scope.focus = false;
+      }, function (status) {
+        $scope.pageMessage = status;
+      });
+    };
 
     $scope.availableSearchParams = [
       { key: "Title", name: "Title", placeholder: "Title..." },
@@ -32,20 +41,10 @@
     $scope.focus = false;
 
     var validSearch = function (searchObject) {
-
       return (searchObject.query || searchObject.title || searchObject.author) ? true : false
-      //if (searchObject.query || searchObject.title || searchObject.author) { 
-        //console.log('TRUE');
-        //return true
-      //} else {
-        //console.log('FALSE');
-        //console.log(searchObject);
-        //return false
-      //}
     };
 
     $scope.$watch('focus', function(value) {
-      //TODO MAKE THIS WORK
       if (!value && !validSearch($scope.query)) {
         $scope.searchReturn = false;
       }
