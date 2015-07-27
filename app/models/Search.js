@@ -15,6 +15,7 @@
         //URL:      amazonBook.DetailPageURL[0], //String of Link to amazon
         Title:    amazonBook.ItemAttributes[0].Title[0], //String of Title
         Author:   amazonBook.ItemAttributes[0].Author[0], //String of Author
+        ID:   amazonBook.ASIN[0], //AMAZON STANDARD IDENTIFICATION NUMBER
         //Img:      amazonBook.LargeImage[0].URL[0] //ImageURL
       }
   };
@@ -41,9 +42,8 @@
     oldQuery["Keywords"] = oldQuery["query"];
     delete oldQuery["query"];
     oldQuery["ResponseGroup"] = 'ItemAttributes';
-    oldQuery["BrowseNode"] = '53';
+    //oldQuery["BrowseNode"] = '53';
     oldQuery["SearchIndex"] = 'Books';
-    console.log(oldQuery);
     return oldQuery;
   };
 
@@ -53,9 +53,15 @@
     
         opHelper.execute('ItemSearch', queryBuilder(queryObject),
         function(error, results) {
-            if (error) console.log(error);
-            if (results.ItemSearchResponse.Error) { console.log('Error: ' + results.ItemSearchResponse.Error + "\n"); }
-            callback(jsBuilder(arrayLocator(results)));
+            if (error) {
+              callback(error);
+            } else if (results.ItemSearchResponse.Error) { 
+              callback('Error: ' + results.ItemSearchResponse.Error + "\n");
+            } else if (results.ItemSearchResponse.Items[0].TotalResults[0] == '0') {
+              callback('No Results');
+            } else {
+              callback(null, jsBuilder(arrayLocator(results)));
+            }
         });
 
   };

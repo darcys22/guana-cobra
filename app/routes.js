@@ -14,6 +14,8 @@ module.exports = function(app) {
   //
   ////         blacklist  Return blacklist  add to blacklist      remove from blacklist
   ////         graylist     ""                    ""                  ""  
+  //
+  //POST  /magazines/:magazine_id/ads   ads#create  create a new ad belonging to a specific magazine
 
   app.get('/api/top', function(req, res) {
     res.sendfile('./app/models/generated.json');
@@ -22,13 +24,23 @@ module.exports = function(app) {
   app.get('/api/users/:id', function(req, res) {
     res.sendfile('./app/models/generated.json');
   });
+
+  app.post('/api/users/:id/books', function(req, res) {
+    //TODO add the book from the request to the users book list
+    //respond with a redirect and success message?
+    console.log(req.body);
+    res.send({redirect: '/mybooks'});
+  });
   
   app.post('/api/search', function(req, res) {
-    
     var Search = require('./models/Search.js');
     //TODO Make this a promise instead of a callback
-    Search(req.body, function(data) {
-      res.json(JSON.stringify(data));
+    Search(req.body, function(error, data) {
+      if (error) {
+        res.status(400).send(error);
+      } else {
+        res.json(JSON.stringify(data));
+      };
     });
   });
 
