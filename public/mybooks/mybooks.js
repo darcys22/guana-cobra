@@ -23,6 +23,9 @@
       newBook.then(function (res) {
         $scope.query = {};
         $scope.focus = false;
+        $scope.searchResults = [];
+        $scope.searchReturn = false;
+        $scope.pageMessage = res;
       }, function (status) {
         $scope.pageMessage = status;
       });

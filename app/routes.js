@@ -21,7 +21,7 @@ module.exports = function(app) {
     res.sendfile('./app/models/generated.json');
   });
 
-  app.get('/api/users/:id', function(req, res) {
+  app.get('/api/users/:id/books', function(req, res) {
     res.sendfile('./app/models/generated.json');
   });
 

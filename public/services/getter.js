@@ -18,7 +18,19 @@
 
       getMyBooks: function(userId) {
         var deferred = $q.defer();
-        $http.get('/api/users/' + userId)
+        $http.get('/api/users/' + userId + '/books')
+          .success(function(data) {
+            deferred.resolve(data);
+          }).error(function(data) {
+            deferred.reject(data);
+          });
+          return deferred.promise;
+        },
+
+      addBookToUser: function(userId, bookId) {
+        var deferred = $q.defer();
+        $http.post('/api/users/' + userId + '/books',
+            {'bookId': bookId})
           .success(function(data) {
             deferred.resolve(data);
           }).error(function(data) {

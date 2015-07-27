@@ -12,8 +12,8 @@
 
 
   <ul class="booksearch container" ng-show="searchReturn">
-    <li ng-repeat="book in searchResults" class="thumbnail" ng-href="{{book.ID}}" >
-      <a target="_blank">{{book.Title}}</a>
+    <li ng-repeat="book in searchResults" class="thumbnail"  >
+      <a ng-click="addBook(book.ID)">{{book.Title}}</a>
       <p>{{book.Author}}</p>
     </li>
   </ul> 
