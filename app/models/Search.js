@@ -1,6 +1,6 @@
 (function() {
 
-  var util = require('util');
+  //var util = require('util');
   var apacCredentials = require('../../config/apac.js');
   OperationHelper = require('apac').OperationHelper;
 
@@ -12,10 +12,10 @@
 
   var responseBuilder = function (amazonBook) {
       return {
-        URL:      amazonBook.DetailPageURL[0], //String of Link to amazon
+        //URL:      amazonBook.DetailPageURL[0], //String of Link to amazon
         Title:    amazonBook.ItemAttributes[0].Title[0], //String of Title
         Author:   amazonBook.ItemAttributes[0].Author[0], //String of Author
-        Img:      amazonBook.LargeImage[0].URL[0] //ImageURL
+        //Img:      amazonBook.LargeImage[0].URL[0] //ImageURL
       }
   };
 
@@ -37,15 +37,23 @@
     return rawResults.ItemSearchResponse.Items[0].Item;
   };
 
+  var queryBuilder = function (oldQuery) {
+    oldQuery["Keywords"] = oldQuery["query"];
+    delete oldQuery["query"];
+    oldQuery["ResponseGroup"] = 'ItemAttributes';
+    oldQuery["BrowseNode"] = '53';
+    oldQuery["SearchIndex"] = 'Books';
+    console.log(oldQuery);
+    return oldQuery;
+  };
+
 
 
   var query = function ( queryObject , callback ) {
     
-        opHelper.execute('ItemSearch', {
-            'SearchIndex': 'Books',
-            'Keywords': 'harry potter',
-            'ResponseGroup': 'ItemAttributes, Images'
-        }, function(error, results) {
+        opHelper.execute('ItemSearch', queryBuilder(queryObject),
+        function(error, results) {
+            if (error) console.log(error);
             if (results.ItemSearchResponse.Error) { console.log('Error: ' + results.ItemSearchResponse.Error + "\n"); }
             callback(jsBuilder(arrayLocator(results)));
         });

@@ -23,13 +23,13 @@ module.exports = function(app) {
     res.sendfile('./app/models/generated.json');
   });
   
-  app.get('/api/search', function(req, res) {
+  app.post('/api/search', function(req, res) {
     
     var Search = require('./models/Search.js');
-    Search('hello', function(data) {
+    //TODO Make this a promise instead of a callback
+    Search(req.body, function(data) {
       res.json(JSON.stringify(data));
     });
-    //res.json(Search('hello'));
   });
 
 
