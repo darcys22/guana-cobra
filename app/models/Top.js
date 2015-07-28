@@ -1,10 +1,20 @@
-// grab the mongoose module
-var mongoose = require('mongoose');
+(function() {
 
-// define our user model
-// module.exports allows us to pass this to other files when it is called
-module.exports = mongoose.model('Top', {
+// grab the mongoose module
+var mongoose = require('mongoose'),
+  Schema = mongoose.Schema;
+
+// define our Top model
+var TopSchema = new Schema({
   rank : {type : Number, required: true},
   books : [Book.schema]
 
 });
+// module.exports allows us to pass this to other files when it is called
+module.exports = mongoose.model('Top', TopSchema);
+
+})();
+
+
+
+
