@@ -2,7 +2,9 @@
 
 // grab the mongoose module
 var mongoose = require('mongoose'),
-  Schema = mongoose.Schema;
+  Schema = mongoose.Schema,
+  Book = require('./Book.js');
+
 
 // define our Top model
 var TopSchema = new Schema({
