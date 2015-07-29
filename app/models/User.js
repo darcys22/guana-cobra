@@ -3,7 +3,8 @@
 // grab the mongoose module
 var mongoose = require('mongoose'),
   Schema = mongoose.Schema,
-  Book = require('./Book.js');
+  Book = require('./Book.js'),
+  findOrCreate = require('mongoose-findorcreate');
 
 // define our user model
 var UserSchema = new Schema({
@@ -12,13 +13,10 @@ var UserSchema = new Schema({
   books : [Book.schema]
 });
 
+
+UserSchema.plugin(findOrCreate);
+
 UserSchema.methods.createFromAsin = function (asin, cb) {
-  var bookObject = {
-    'title': 'Bleh',
-    'author': 'More Bleh',
-    'asin': 'Numbers Bleh',
-    'cover': 'URL BLEH'
-  };
   var apacCredentials = require('../../config/apac.js'),
     OperationHelper = require('apac').OperationHelper;
 
@@ -33,10 +31,18 @@ UserSchema.methods.createFromAsin = function (asin, cb) {
     'ItemId' : asin,
     'ResponseGroup': 'ItemAttributes,Images'
   }, function(err, results) {
+    debugger;
+    var bookObject = {
+      'title': 'Bleh',
+      'author': 'More Bleh',
+      'asin': 'Numbers Bleh',
+      'cover': 'URL BLEH'
+    };
     console.log(results);
   });
 
-  return this.books.push(bookObject);
+  cb(null, this.books.push(bookObject));
+};
 
 // module.exports allows us to pass this to other files when it is called
 module.exports = mongoose.model('User', UserSchema);

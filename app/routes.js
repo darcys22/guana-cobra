@@ -26,12 +26,16 @@ module.exports = function(app) {
   });
 
   app.post('/api/users/:id/books', function(req, res) {
-    //TODO add the book from the request to the users book list
-    //respond with a redirect and success message?
     var User = require('./models/User.js');
-    User.createFromAsin(req.body, res);
-    console.log(req.body);
-    res.send({redirect: '/mybooks'});
+    debugger;
+    User.findOrCreate({id: req.params.id}, function(err, currentUser, created) {
+      debugger;
+      currentUser.createFromAsin(req.body, function(e,c) {
+        res.send(c);
+      })
+    });
+    //console.log(req.body);
+    //res.send({redirect: '/mybooks'});
   });
   
   app.post('/api/search', function(req, res) {

@@ -1,6 +1,6 @@
 (function () {
 
-  var crypto = require('crypto');
+  //var crypto = require('crypto');
 
   var injectParams = ['$cookies'];
 
@@ -11,9 +11,10 @@
         var expireDate = new Date();
         expireDate.setDate(expireDate.getDate() + 365 * 10);
         var nonce = ("" + expireDate + Math.floor(Math.random()*5000));
-        var cookie = crypto.createHash("md5")
-          .update(nonce)
-          .digest("hex");
+        var cookie = nonce;
+        //var cookie = crypto.createHash("md5")
+          //.update(nonce)
+          //.digest("hex");
         $cookies.put('current.user', cookie, {'expires': expireDate})
         return cookie;
       }
