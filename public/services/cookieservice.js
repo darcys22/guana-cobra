@@ -10,7 +10,7 @@
       newCookie: function() {
         var expireDate = new Date();
         expireDate.setDate(expireDate.getDate() + 365 * 10);
-        var nonce = ("" + expireDate + Math.floor(Math.random()*5000));
+        var nonce = ("" + expireDate.getTime() + Math.floor(Math.random()*5000));
         var cookie = nonce;
         //var cookie = crypto.createHash("md5")
           //.update(nonce)

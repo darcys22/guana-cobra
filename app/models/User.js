@@ -17,31 +17,32 @@ var UserSchema = new Schema({
 UserSchema.plugin(findOrCreate);
 
 UserSchema.methods.createFromAsin = function (asin, cb) {
-  var apacCredentials = require('../../config/apac.js'),
-    OperationHelper = require('apac').OperationHelper;
+  //var apacCredentials = require('../../config/apac.js'),
+    //OperationHelper = require('apac').OperationHelper;
 
-  var opHelper = new OperationHelper({
-    awsId: apacCredentials.accessKey,
-    awsSecret: apacCredentials.secretKey,
-    assocId: apacCredentials.assocID
-  });
+  //var opHelper = new OperationHelper({
+    //awsId: apacCredentials.accessKey,
+    //awsSecret: apacCredentials.secretKey,
+    //assocId: apacCredentials.assocID
+  //});
 
-  opHelper.execute('ItemLookup', {
-    'SearchIndex': 'Books',
-    'ItemId' : asin,
-    'ResponseGroup': 'ItemAttributes,Images'
-  }, function(err, results) {
-    debugger;
+  //opHelper.execute('ItemLookup', {
+    //'SearchIndex': 'Books',
+    //'ItemId' : asin,
+    //'ResponseGroup': 'ItemAttributes,Images'
+  //}, function(err, results) {
     var bookObject = {
       'title': 'Bleh',
       'author': 'More Bleh',
       'asin': 'Numbers Bleh',
       'cover': 'URL BLEH'
     };
-    console.log(results);
-  });
+    this.books.push(bookObject);
+    this.save(function (e) {
+      if (!e) console.log('Success inside!');
+    });
+  //});
 
-  cb(null, this.books.push(bookObject));
 };
 
 // module.exports allows us to pass this to other files when it is called
