@@ -17,31 +17,33 @@ var UserSchema = new Schema({
 UserSchema.plugin(findOrCreate);
 
 UserSchema.methods.createFromAsin = function (asin, cb) {
-  //var apacCredentials = require('../../config/apac.js'),
-    //OperationHelper = require('apac').OperationHelper;
+  var apacCredentials = require('../../config/apac.js'),
+    OperationHelper = require('apac').OperationHelper;
 
-  //var opHelper = new OperationHelper({
-    //awsId: apacCredentials.accessKey,
-    //awsSecret: apacCredentials.secretKey,
-    //assocId: apacCredentials.assocID
-  //});
+  var opHelper = new OperationHelper({
+    awsId: apacCredentials.accessKey,
+    awsSecret: apacCredentials.secretKey,
+    assocId: apacCredentials.assocID
+  });
 
-  //opHelper.execute('ItemLookup', {
-    //'SearchIndex': 'Books',
-    //'ItemId' : asin,
-    //'ResponseGroup': 'ItemAttributes,Images'
-  //}, function(err, results) {
+  var instance = this;
+
+  opHelper.execute('ItemLookup', {
+    'SearchIndex': 'Books',
+    'ItemId' : asin,
+    'ResponseGroup': 'ItemAttributes,Images'
+  }, function(err, results) {
     var bookObject = {
       'title': 'Bleh',
       'author': 'More Bleh',
       'asin': 'Numbers Bleh',
       'cover': 'URL BLEH'
     };
-    this.books.push(bookObject);
-    this.save(function (e) {
+    instance.books.push(bookObject);
+    instance.save(function (e) {
       if (!e) console.log('Success inside!');
     });
-  //});
+  });
 
 };
 
