@@ -4,6 +4,7 @@
 var mongoose = require('mongoose'),
   Schema = mongoose.Schema,
   Book = require('./Book.js'),
+  Q = require('q'),
   findOrCreate = require('mongoose-findorcreate');
 
 // define our user model
@@ -18,6 +19,7 @@ UserSchema.plugin(findOrCreate);
 
 UserSchema.methods.createFromAsin = function (amazonId, cb) {
 
+  var deferred = Q.defer()
   var instance = this;
 
   Book.findOrCreate({asin: amazonId.bookId}, function (err, bookObject, created) {
@@ -47,6 +49,7 @@ UserSchema.methods.createFromAsin = function (amazonId, cb) {
           instance.save(function (e) {
             if (!e) console.log('Success inside! and new book');
           });
+          deferred.resolve(instance);
         });
 
       });
@@ -58,10 +61,11 @@ UserSchema.methods.createFromAsin = function (amazonId, cb) {
       instance.save(function (e) {
         if (!e) console.log('Success inside! and old book');
       });
+      deferred.resolve(instance);
 
     }
   });
-
+  cb(null, deferred.promise);
 };
 
 // module.exports allows us to pass this to other files when it is called

@@ -19,7 +19,8 @@
     "express": "^4.13.1",
     "method-override": "^2.3.4",
     "mongoose": "^4.0.8",
-    "mongoose-findorcreate": "^0.1.2"
+    "mongoose-findorcreate": "^0.1.2",
+    "q": "^1.4.1"
   },
   "devDependencies": {}
 }

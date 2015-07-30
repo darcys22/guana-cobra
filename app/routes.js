@@ -33,8 +33,6 @@ module.exports = function(app) {
         res.send(c);
       });
     });
-    //console.log(req.body);
-    //res.send({redirect: '/mybooks'});
   });
   
   app.post('/api/search', function(req, res) {

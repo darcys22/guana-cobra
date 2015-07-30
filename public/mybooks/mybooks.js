@@ -1,8 +1,8 @@
 (function () {
   
-  var injectParams = ['$scope', '$rootScope', 'controllerService', 'bookService'];
+  var injectParams = ['$scope', '$rootScope', '$timeout', 'controllerService', 'bookService'];
 
-  var MybooksController = function($scope, $rootScope, controllerService, bookService) {
+  var MybooksController = function($scope, $rootScope, $timeout, controllerService, bookService) {
 
     controllerService($scope);
 
@@ -18,16 +18,25 @@
       console.log(status);
     });
 
+    $scope.pageMessage = false;
+    function clearMessage() {
+      $scope.pageMessage = false;
+    };
+
     $scope.addBook = function(bookID) {
+      $scope.pageMessage = 'Saving Book';
       var newBook = bookService.addBookToUser($rootScope.userId, bookID);
       newBook.then(function (res) {
         $scope.query = {};
         $scope.focus = false;
         $scope.searchResults = [];
         $scope.searchReturn = false;
-        $scope.pageMessage = res;
+        $scope.pageMessage = 'Book added Successfully!';
+        //$scope.books = res;
+        $timeout(clearMessage, 3000);
       }, function (status) {
         $scope.pageMessage = status;
+        $timeout(clearMessage, 3000);
       });
     };
 
