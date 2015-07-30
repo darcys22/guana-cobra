@@ -10,7 +10,7 @@ var mongoose = require('mongoose'),
 var UserSchema = new Schema({
   id : {type : String, required: true},
   email : {type : String},
-  books : [Book.schema]
+  books : [{type: Schema.Types.ObjectId, ref: 'Book'}]
 });
 
 
@@ -33,16 +33,19 @@ UserSchema.methods.createFromAsin = function (asin, cb) {
     'ItemId' : asin,
     'ResponseGroup': 'ItemAttributes,Images'
   }, function(err, results) {
-    var bookObject = {
+    var bookObject = new Book({
       'title': 'Bleh',
       'author': 'More Bleh',
       'asin': 'Numbers Bleh',
       'cover': 'URL BLEH'
-    };
-    instance.books.push(bookObject);
-    instance.save(function (e) {
-      if (!e) console.log('Success inside!');
     });
+    bookObject.save(function (err, book) {
+      instance.books.push(book._id);
+      instance.save(function (e) {
+        if (!e) console.log('Success inside!');
+      });
+    });
+
   });
 
 };
