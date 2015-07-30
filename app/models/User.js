@@ -16,36 +16,50 @@ var UserSchema = new Schema({
 
 UserSchema.plugin(findOrCreate);
 
-UserSchema.methods.createFromAsin = function (asin, cb) {
-  var apacCredentials = require('../../config/apac.js'),
-    OperationHelper = require('apac').OperationHelper;
-
-  var opHelper = new OperationHelper({
-    awsId: apacCredentials.accessKey,
-    awsSecret: apacCredentials.secretKey,
-    assocId: apacCredentials.assocID
-  });
+UserSchema.methods.createFromAsin = function (amazonId, cb) {
 
   var instance = this;
 
-  opHelper.execute('ItemLookup', {
-    'SearchIndex': 'Books',
-    'ItemId' : asin,
-    'ResponseGroup': 'ItemAttributes,Images'
-  }, function(err, results) {
-    var bookObject = new Book({
-      'title': 'Bleh',
-      'author': 'More Bleh',
-      'asin': 'Numbers Bleh',
-      'cover': 'URL BLEH'
-    });
-    bookObject.save(function (err, book) {
-      instance.books.push(book._id);
-      instance.save(function (e) {
-        if (!e) console.log('Success inside!');
-      });
-    });
+  Book.findOrCreate({asin: amazonId.bookId}, function (err, bookObject, created) {
+    if (err) { console.log(err)}
+    if (created) {
+      var apacCredentials = require('../../config/apac.js'),
+        OperationHelper = require('apac').OperationHelper;
 
+      var opHelper = new OperationHelper({
+        awsId: apacCredentials.accessKey,
+        awsSecret: apacCredentials.secretKey,
+        assocId: apacCredentials.assocID
+      });
+
+
+      opHelper.execute('ItemLookup', {
+        //'SearchIndex': 'Books',
+        'ItemId' : amazonId.bookId,
+        'ResponseGroup': 'ItemAttributes,Images'
+      }, function(err, results) {
+        bookObject.title  = results.ItemLookupResponse.Items[0].Item[0].ItemAttributes[0].Title[0];
+        bookObject.author = results.ItemLookupResponse.Items[0].Item[0].ItemAttributes[0].Author[0];
+        bookObject.cover  = results.ItemLookupResponse.Items[0].Item[0].LargeImage[0].URL[0];
+
+        bookObject.save(function (err, book) {
+          instance.books.push(book._id);
+          instance.save(function (e) {
+            if (!e) console.log('Success inside! and new book');
+          });
+        });
+
+      });
+
+
+    } else {
+
+      instance.books.push(bookObject._id);
+      instance.save(function (e) {
+        if (!e) console.log('Success inside! and old book');
+      });
+
+    }
   });
 
 };

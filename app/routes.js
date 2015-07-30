@@ -28,7 +28,7 @@ module.exports = function(app) {
   app.post('/api/users/:id/books', function(req, res) {
 
     var User = require('./models/User.js');
-    User.findOrCreate({id: 1}, function(err, currentUser, created) {
+    User.findOrCreate({id: req.params.id}, function(err, currentUser, created) {
       currentUser.createFromAsin(req.body, function(e,c) {
         res.send(c);
       });
