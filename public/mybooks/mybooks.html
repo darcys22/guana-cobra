@@ -1,5 +1,5 @@
 <div class="customers view indent">
-  <div class="alert alert-info" role="alert" ng-show="pageMessage">{{pageMessage}}</div>
+  <div class="alert alert-info" role="alert" ng-show="pageMessage" text-align: "center">{{pageMessage}}</div>
   <div class="flexsearch">
       <div class="flexsearch--wrapper">
           <div class="flexsearch--input-wrapper">
@@ -9,6 +9,13 @@
   </div>
 
   <br>
+
+  <ul class="booksearch container" ng-show="searching">
+    <li class="thumbnail">
+      <img ng-src="assets/images/preloader.gif" alt="preloader" class="loader" ></img>
+      <!--<p text-align: "center">Searching</p>-->
+    </li>
+  </ul>
 
 
   <ul class="booksearch container" ng-show="searchReturn">

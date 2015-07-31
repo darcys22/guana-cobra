@@ -38,6 +38,8 @@ body {
 }
 
 .loader {
+  width: 32;
+  height: 32;
   margin: 0 auto;
 }
 
@@ -78,7 +80,7 @@ body {
   min-width: 300px;
 }
 .rwd-table tr {
-  border-top: 1px solid #ddd;
+  /*border-top: 1px solid #ddd;*/
   border-bottom: 1px solid #ddd;
 }
 .rwd-table th {

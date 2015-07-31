@@ -33,10 +33,10 @@
         $scope.searchReturn = false;
         $scope.pageMessage = 'Book added Successfully!';
         //$scope.books = res;
-        $timeout(clearMessage, 3000);
+        $timeout(clearMessage, 2000);
       }, function (status) {
         $scope.pageMessage = status;
-        $timeout(clearMessage, 3000);
+        $timeout(clearMessage, 2000);
       });
     };
 
@@ -62,15 +62,22 @@
       }
     });
 
+    $scope.searching = false;
+
     $scope.$watch('query', function(value) {
       if (validSearch(value)) {
           $scope.searchResults = bookService.searchBooks(value);
+          $scope.searching = true;
           $scope.searchResults.then(function (books) {
             $scope.searchResults = JSON.parse(books);
+            $scope.searching = false;
             $scope.searchReturn = true;
             $scope.focus = false;
           }, function (status) {
-            console.log(status);
+            $scope.pageMessage = status;
+            $timeout(clearMessage, 2000);
+            $scope.searching = false;
+            $scope.searchReturn = false;
           });
       }
     }, true);
