@@ -17,7 +17,7 @@ var UserSchema = new Schema({
 
 UserSchema.plugin(findOrCreate);
 
-UserSchema.methods.createFromAsin = function (amazonId, cb) {
+UserSchema.methods.createFromAsin = function (amazonId) {
 
   var deferred = Q.defer()
   var instance = this;
@@ -47,9 +47,14 @@ UserSchema.methods.createFromAsin = function (amazonId, cb) {
         bookObject.save(function (err, book) {
           instance.books.push(book._id);
           instance.save(function (e) {
-            if (!e) console.log('Success inside! and new book');
+            if (!e) {
+              console.log('Success inside! and new book');
+              instance.populate('books', function (err) {
+                deferred.resolve(instance.books);
+              });
+            }
           });
-          deferred.resolve(instance);
+
         });
 
       });
@@ -59,13 +64,17 @@ UserSchema.methods.createFromAsin = function (amazonId, cb) {
 
       instance.books.push(bookObject._id);
       instance.save(function (e) {
-        if (!e) console.log('Success inside! and old book');
+        if (!e) {
+          console.log('Success inside! and old book');
+          instance.populate('books', function (err) {
+            deferred.resolve(instance.books);
+          });
+        }
       });
-      deferred.resolve(instance);
 
     }
   });
-  cb(null, deferred.promise);
+  return deferred.promise;
 };
 
 // module.exports allows us to pass this to other files when it is called

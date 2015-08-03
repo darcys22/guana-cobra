@@ -40,10 +40,9 @@ module.exports = function(app) {
   app.post('/api/users/:id/books', function(req, res) {
     var User = require('./models/User.js');
     User.findOrCreate({id: req.params.id}, function(err, currentUser, created) {
-      currentUser.createFromAsin(req.body, function(e,c) {
-        c.populate('books', function(err) {
-          res.send(c.books);
-        });
+      var promis = currentUser.createFromAsin(req.body); 
+      promis.then(function (bklst) {
+        res.send(bklst);
       });
     });
   });

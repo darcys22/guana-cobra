@@ -32,7 +32,7 @@
         $scope.searchResults = [];
         $scope.searchReturn = false;
         $scope.pageMessage = 'Book added Successfully!';
-        //$scope.books = res;
+        $scope.books = res;
         $timeout(clearMessage, 2000);
       }, function (status) {
         $scope.pageMessage = status;
