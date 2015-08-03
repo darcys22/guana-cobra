@@ -77,6 +77,28 @@ UserSchema.methods.createFromAsin = function (amazonId) {
   return deferred.promise;
 };
 
+UserSchema.methods.delete = function (bookId) {
+  var deferred = Q.defer()
+  var instance = this;
+
+  this.books.pull(bookId);
+  this.save(function (err, book) {
+    if (!err) {
+      instance.populate('books', function (err) {
+        if (!err) {
+          deferred.resolve(instance.books);
+        } else {
+          deferred.reject(err);
+        };
+      });
+    } else {
+      deferred.reject(err);
+    }
+  });
+
+  return deferred.promise;
+};
+
 // module.exports allows us to pass this to other files when it is called
 module.exports = mongoose.model('User', UserSchema);
 
