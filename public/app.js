@@ -22,11 +22,10 @@ config(['$routeProvider', function($routeProvider) {
 
 }]).
 
-run(['$rootScope', '$cookies', 'cookieService',
-  function($rootScope, $cookies, cookieService) {
-
+run(['$rootScope', '$cookies', '$location', 'cookieService',
+  function($rootScope, $cookies, $location, cookieService) {
+    $rootScope.location = $location;
     $rootScope.userId = $cookies.get('current.user') || cookieService.newCookie();
-
 }]);
 
 
