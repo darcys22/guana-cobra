@@ -13,7 +13,7 @@ var favicon        = require('serve-favicon');
 var db = require('./config/db');
 
 var port = process.env.PORT || 8080; // set our port
-mongoose.connect(db.url); // connect to our mongoDB database (commented out after you enter in your own credentials)
+mongoose.connect(db.url); // connect to our mongoDB database
 
 //favicon middleware
 app.use(favicon(__dirname + '/favicon.png'));  
