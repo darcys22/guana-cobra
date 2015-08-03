@@ -28,7 +28,7 @@ module.exports = function(app) {
     .populate('books')
     .exec(function (err, currentUser) {
       if (err) {
-        res.send(err);
+        res.status(500).send(err);
       } else if (currentUser == null) {
         res.send([]);
       } else {
@@ -49,7 +49,6 @@ module.exports = function(app) {
   
   app.post('/api/search', function(req, res) {
     var Search = require('./models/Search.js');
-    //TODO Make this a promise instead of a callback
     Search(req.body, function(error, data) {
       if (error) {
         res.status(400).send(error);
