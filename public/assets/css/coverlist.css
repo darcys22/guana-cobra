@@ -59,6 +59,20 @@
     font: 32px Arial, sans-serif;
 }
 
+.del {
+    z-index: 15;
+    position: absolute;
+
+    width: 36px;
+    height: 36px;
+    padding: 5px;
+    
+    color: red;
+    text-align: center;
+    
+    font: 32px Arial, sans-serif;
+}
+
 .book-list li img {
   height: 100%;
   width: 100%;
