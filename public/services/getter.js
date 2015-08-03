@@ -39,6 +39,17 @@
           return deferred.promise;
         },
 
+      deleteBookFromUser: function(userId, bookId) {
+        var deferred = $q.defer();
+        $http.delete('/api/users/' + userId + '/books/', + bookId)
+          .success(function(data) {
+            deferred.resolve(data);
+          }).error(function(data) {
+            deferred.reject(data);
+          });
+          return deferred.promise;
+        },
+
       searchBooks: function(query) {
         var deferred = $q.defer();
         $http.post('/api/search', query)
