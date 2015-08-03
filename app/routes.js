@@ -46,6 +46,16 @@ module.exports = function(app) {
       });
     });
   });
+
+  app.delete('/api/users/:id/books/:bookid', function(req, res) {
+    var User = require('./models/User.js');
+    User.findOne({id: req.params.id}, function(err, currentUser) {
+      var promis = currentUser.delete(req.params.bookid);
+      promis.then(function (bklst) {
+        res.send(bklst);
+      });
+    });
+  });
   
   app.post('/api/search', function(req, res) {
     var Search = require('./models/Search.js');
