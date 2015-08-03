@@ -22,15 +22,28 @@ module.exports = function(app) {
   });
 
   app.get('/api/users/:id/books', function(req, res) {
-    res.sendfile('./app/models/generated.json');
+    var User = require('./models/User.js');
+    User
+    .findOne({id: req.params.id})
+    .populate('books')
+    .exec(function (err, currentUser) {
+      if (err) {
+        res.send(err);
+      } else if (currentUser == null) {
+        res.send([]);
+      } else {
+        res.send(currentUser.books);
+      };
+    });
   });
 
   app.post('/api/users/:id/books', function(req, res) {
-
     var User = require('./models/User.js');
     User.findOrCreate({id: req.params.id}, function(err, currentUser, created) {
       currentUser.createFromAsin(req.body, function(e,c) {
-        res.send(c);
+        c.populate('books', function(err) {
+          res.send(c.books);
+        });
       });
     });
   });
