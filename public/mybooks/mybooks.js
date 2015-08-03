@@ -25,13 +25,15 @@
 
     $scope.addBook = function(bookID) {
       $scope.pageMessage = 'Saving Book';
+      $scope.query = {};
+      $scope.focus = false;
+      $scope.searchResults = [];
+      $scope.searchReturn = false;
       var newBook = bookService.addBookToUser($rootScope.userId, bookID);
       newBook.then(function (res) {
-        $scope.query = {};
-        $scope.focus = false;
-        $scope.searchResults = [];
-        $scope.searchReturn = false;
+        console.log(res);
         $scope.pageMessage = 'Book added Successfully!';
+        //$scope.pageMessage = res;
         $scope.books = res;
         $timeout(clearMessage, 2000);
       }, function (status) {
