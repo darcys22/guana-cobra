@@ -5,6 +5,7 @@ var app            = express();
 var mongoose       = require('mongoose');
 var bodyParser     = require('body-parser');
 var methodOverride = require('method-override');
+var favicon        = require('serve-favicon');
 //TODO remove cookie-parser?
 // configuration ===========================================
 	
@@ -13,6 +14,9 @@ var db = require('./config/db');
 
 var port = process.env.PORT || 8080; // set our port
 mongoose.connect(db.url); // connect to our mongoDB database (commented out after you enter in your own credentials)
+
+//favicon middleware
+app.use(favicon(__dirname + '/favicon.png'));  
 
 // get all data/stuff of the body (POST) parameters
 app.use(bodyParser.json()); // parse application/json 
