@@ -31,9 +31,20 @@
       $scope.searchReturn = false;
       var newBook = bookService.addBookToUser($rootScope.userId, bookID);
       newBook.then(function (res) {
-        console.log(res);
         $scope.pageMessage = 'Book added Successfully!';
-        //$scope.pageMessage = res;
+        $scope.books = res;
+        $timeout(clearMessage, 2000);
+      }, function (status) {
+        $scope.pageMessage = status;
+        $timeout(clearMessage, 2000);
+      });
+    };
+
+    $scope.deleteBook = function(bookID) {
+      $scope.pageMessage = 'Deleting Book';
+      var newBook = bookService.deleteBookFromUser($rootScope.userId, bookID);
+      newBook.then(function (res) {
+        $scope.pageMessage = 'Book deleted Successfully!';
         $scope.books = res;
         $timeout(clearMessage, 2000);
       }, function (status) {
