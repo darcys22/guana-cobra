@@ -41,7 +41,7 @@
 
       deleteBookFromUser: function(userId, bookId) {
         var deferred = $q.defer();
-        $http.delete('/api/users/' + userId + '/books/', + bookId)
+        $http.delete('/api/users/' + userId + '/books/' + bookId)
           .success(function(data) {
             deferred.resolve(data);
           }).error(function(data) {
