@@ -4,7 +4,7 @@
         <img class="cover-image" src="assets/images/alc.jpg">
         <div class="cover">
             <div class="cover-overlay">
-              <span ng-if="location.path() != '/hordemind'" class="del noselect">&#10006;</span>
+              <span ng-if="location.path() != '/hordemind'" ng-click="deleteBook(bk._id)"class="del noselect">&#10006;</span>
             </div>
             <span ng-if="location.path() == '/hordemind'" class="rank">{{bk.id}}</span>
         </div>
