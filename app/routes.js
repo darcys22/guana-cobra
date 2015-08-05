@@ -28,8 +28,10 @@ module.exports = function(app) {
     .populate('books')
     .exec(function (err, currentUser) {
       if (err) {
+        console.debug('Within FindOneUser: ' + err);
         res.status(500).send(err);
       } else if (currentUser == null) {
+        console.debug('currentUser = null');
         res.send([]);
       } else {
         res.send(currentUser.books);
@@ -40,6 +42,10 @@ module.exports = function(app) {
   app.post('/api/users/:id/books', function(req, res) {
     var User = require('./models/User.js');
     User.findOrCreate({id: req.params.id}, function(err, currentUser, created) {
+      if (err) {
+        console.debug('FindorCreate: ' + err);
+        res.status(500).send(err);
+      }
       var promis = currentUser.createFromAsin(req.body); 
       promis.then(function (bklst) {
         res.send(bklst);
@@ -49,18 +55,31 @@ module.exports = function(app) {
 
   app.delete('/api/users/:id/books/:bookid', function(req, res) {
     var User = require('./models/User.js');
-    User.findOne({id: req.params.id}, function(err, currentUser) {
-      var promis = currentUser.delete(req.params.bookid);
-      promis.then(function (bklst) {
-        res.send(bklst);
-      });
+    User.findOneAndUpdate({id: req.params.id}, {$pull: {books: {asin: req.params.bookid}}}, function(err, data){
+        if (err) {
+          console.log(err);
+          res.status(500).send(err);
+        } else {
+          res.send(data);
+        }
     });
+    //User.findOne({id: req.params.id}, function(err, currentUser) {
+      //if (err) {
+        //console.debug('DeleteFindUser: ' + err);
+        //res.status(500).send(err);
+      //}
+      //var promis = currentUser.delete(req.params.bookid);
+      //promis.then(function (bklst) {
+        //res.send(bklst);
+      //});
+    //});
   });
   
   app.post('/api/search', function(req, res) {
     var Search = require('./models/Search.js');
     Search(req.body, function(error, data) {
       if (error) {
+        console.debug('Search: ' + err);
         res.status(400).send(error);
       } else {
         res.json(JSON.stringify(data));
