@@ -13,8 +13,12 @@
   background: #000;
 }
 
-.book-list li:hover i {
-  opacity: 1;
+.cover-overlay {
+  display: none;
+}
+
+.book-list li:hover .cover-overlay {
+  display: block;
 }
 
 .book-list li i {
@@ -45,6 +49,10 @@
   background: url(../images/posterholder.png) no-repeat 50% 50%;
 }
 
+.cover-overlay:hover {
+  width: 1000;
+}
+
 .rank {
     z-index: 15;
     position: absolute;
@@ -61,16 +69,25 @@
 
 .del {
     z-index: 15;
-    position: absolute;
-
+    position: relative;
+    float: right;
     width: 36px;
     height: 36px;
-    padding: 5px;
-    
-    color: red;
-    text-align: center;
-    
+    color: #990000;
     font: 32px Arial, sans-serif;
+}
+
+.del:active {
+  color: #1A0000;
+}
+
+.noselect {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 .book-list li img {
