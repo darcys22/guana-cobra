@@ -55,24 +55,16 @@ module.exports = function(app) {
 
   app.delete('/api/users/:id/books/:bookid', function(req, res) {
     var User = require('./models/User.js');
-    User.findOneAndUpdate({id: req.params.id}, {$pull: {books: {asin: req.params.bookid}}}, function(err, data){
-        if (err) {
-          console.log(err);
-          res.status(500).send(err);
-        } else {
-          res.send(data);
-        }
+    User.findOne({id: req.params.id}, function(err, currentUser) {
+      if (err) {
+        console.debug('DeleteFindUser: ' + err);
+        res.status(500).send(err);
+      }
+      var promis = currentUser.delete(req.params.bookid);
+      promis.then(function (bklst) {
+        res.send(bklst);
+      });
     });
-    //User.findOne({id: req.params.id}, function(err, currentUser) {
-      //if (err) {
-        //console.debug('DeleteFindUser: ' + err);
-        //res.status(500).send(err);
-      //}
-      //var promis = currentUser.delete(req.params.bookid);
-      //promis.then(function (bklst) {
-        //res.send(bklst);
-      //});
-    //});
   });
   
   app.post('/api/search', function(req, res) {
