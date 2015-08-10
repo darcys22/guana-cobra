@@ -8,9 +8,9 @@
             </div>
             <span ng-if="location.path() == '/hordemind'" class="rank">{{bk.id}}</span>
         </div>
-
-
-        <strong class="Title" title="{{bk.title}}">{{bk.title}}</strong>
+        <a ng-href="{{bk.url}}" target="_blank">
+          <strong class="Title" title="{{bk.title}}">{{bk.title}}</strong>
+        </a>
         <small class="Author">{{bk.author}}</small>
       </li>
   </ul>

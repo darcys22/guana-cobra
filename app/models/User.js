@@ -43,6 +43,7 @@ UserSchema.methods.createFromAsin = function (amazonId) {
         bookObject.title  = results.ItemLookupResponse.Items[0].Item[0].ItemAttributes[0].Title[0];
         bookObject.author = results.ItemLookupResponse.Items[0].Item[0].ItemAttributes[0].Author[0];
         bookObject.cover  = results.ItemLookupResponse.Items[0].Item[0].LargeImage[0].URL[0];
+        bookObject.url    = results.ItemLookupResponse.Items[0].Item[0].DetailPageURL[0];
 
         bookObject.save(function (err, book) {
           instance.books.push(book._id);

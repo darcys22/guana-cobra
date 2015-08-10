@@ -122,12 +122,6 @@
   border-radius: 3px;
 }
 
-.book-list li a {
-  display: block;
-  height: 196px;
-  width: 133px;
-}
-
 .book-list li strong {
   color: #FFF;
   display: block;

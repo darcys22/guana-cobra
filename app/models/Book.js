@@ -7,14 +7,15 @@ var mongoose = require('mongoose'),
 
 // define our Book model
 var BookSchema = new Schema({
-  asin   : {type : String, required: true},
-	title  : {type : String},
-	author : {type : String},
-	cover  : {type : String},
-	votes  : {type : Number, default: 0},
-  rank   : {type : Number, default: 0},
+  asin       : {type : String, required: true},
+	author     : {type : String},
 	blacklist  : {type : Boolean, default: false},
+	cover      : {type : String},
 	graylist   : {type : Boolean, default: false},
+  rank       : {type : Number, default: 0},
+	title      : {type : String},
+	url        : {type : String},
+	votes      : {type : Number, default: 0},
 
 });
 

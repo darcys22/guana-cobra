@@ -31,7 +31,7 @@ module.exports = function(app) {
         console.debug('Within FindOneUser: ' + err);
         res.status(500).send(err);
       } else if (currentUser == null) {
-        console.debug('currentUser = null');
+        console.log('currentUser = null');
         res.send([]);
       } else {
         res.send(currentUser.books);
