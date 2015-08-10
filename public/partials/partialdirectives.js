@@ -24,9 +24,18 @@
     }
   };
 
+  var searchBar = function () {
+    return {
+      restrict: 'E',
+      scope: false,
+      templateUrl: 'partials/search.html'
+    }
+  };
+
   angular.module('myApp')
     .directive('viewSelecter', viewSelecter)
     .directive('coverView', coverView)
+    .directive('searchBar', searchBar)
     .directive('listView', listView);
 }());
 

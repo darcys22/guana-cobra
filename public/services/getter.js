@@ -52,7 +52,7 @@
 
       searchBooks: function(query) {
         var deferred = $q.defer();
-        $http.post('/api/search', query)
+        $http.post('/api/search', JSON.stringify({'Keywords': query}))
           .success(function(data) {
             deferred.resolve(data);
           }).error(function(data) {

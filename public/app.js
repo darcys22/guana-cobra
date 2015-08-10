@@ -8,7 +8,6 @@ var myApp = angular.module('myApp', [
     'ui.bootstrap',
     'myApp.landing',
     'myApp.mybooks',
-    'angular-advanced-searchbox',
     'myApp.hordemind'
 ]).
 

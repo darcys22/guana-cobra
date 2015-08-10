@@ -1,0 +1,17 @@
+<div class="advancedSearchBox" ng-class="{active:focus}" ng-click="inputFocus()">
+    <span ng-show="query.length === 0" class="search-icon glyphicon glyphicon-search"></span>
+    <a ng-href="" ng-show="query.length > 0" ng-click="removeSearch()" role="button">
+        <span class="remove-all-icon glyphicon glyphicon-trash"></span>
+    </a>
+    <div>
+        <input name="searchbox"
+               class="search-input"
+               id="search-input"
+               type="text"
+               placeholder="Add Books..."
+               ng-focus="focus = true"
+               ng-blur="focus = false"
+               ng-change="searchChanged(query)"
+               ng-model="query" />
+    </div>
+</div>

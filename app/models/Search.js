@@ -1,8 +1,7 @@
 (function() {
 
-  //var util = require('util');
   var apacCredentials = require('../../config/apac.js');
-  OperationHelper = require('apac').OperationHelper;
+  var OperationHelper = require('apac').OperationHelper;
 
   var opHelper = new OperationHelper({
       awsId: apacCredentials.accessKey,
@@ -39,19 +38,16 @@
   };
 
   var queryBuilder = function (oldQuery) {
-    oldQuery["Keywords"] = oldQuery["query"];
-    delete oldQuery["query"];
     oldQuery["ResponseGroup"] = 'ItemAttributes';
-    //oldQuery["BrowseNode"] = '53';
     oldQuery["SearchIndex"] = 'Books';
     return oldQuery;
   };
 
 
 
-  var query = function ( queryObject , callback ) {
+  var query = function ( query, callback ) {
     
-        opHelper.execute('ItemSearch', queryBuilder(queryObject),
+        opHelper.execute('ItemSearch', queryBuilder(query),
         function(error, results) {
             if (error) {
               callback(error);

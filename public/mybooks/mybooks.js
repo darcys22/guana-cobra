@@ -1,8 +1,8 @@
 (function () {
   
-  var injectParams = ['$scope', '$rootScope', '$timeout', 'controllerService', 'bookService'];
+  var injectParams = ['$scope', '$rootScope', '$timeout', '$window', 'controllerService', 'bookService'];
 
-  var MybooksController = function($scope, $rootScope, $timeout, controllerService, bookService) {
+  var MybooksController = function($scope, $rootScope, $timeout, $window, controllerService, bookService) {
 
     controllerService($scope);
 
@@ -25,7 +25,7 @@
 
     $scope.addBook = function(bookID) {
       $scope.pageMessage = 'Saving Book';
-      $scope.query = {};
+      $scope.query = '';
       $scope.focus = false;
       $scope.searchResults = [];
       $scope.searchReturn = false;
@@ -53,47 +53,55 @@
       });
     };
 
-    $scope.availableSearchParams = [
-      { key: "Title", name: "Title", placeholder: "Title..." },
-      { key: "Author", name: "Author", placeholder: "Author..." },
-    ];
-
-    $scope.doBlur = function() {
-      console.log('blur');
-    };
-
-    $scope.query = {};
+    $scope.query = '';
     $scope.focus = false;
-
-    var validSearch = function (searchObject) {
-      return (searchObject.query || searchObject.title || searchObject.author) ? true : false
-    };
-
-    $scope.$watch('focus', function(value) {
-      if (!value && !validSearch($scope.query)) {
-        $scope.searchReturn = false;
-      }
-    });
-
     $scope.searching = false;
 
-    $scope.$watch('query', function(value) {
-      if (validSearch(value)) {
-          $scope.searchResults = bookService.searchBooks(value);
-          $scope.searching = true;
-          $scope.searchResults.then(function (books) {
-            $scope.searchResults = JSON.parse(books);
-            $scope.searching = false;
-            $scope.searchReturn = true;
-            $scope.focus = false;
-          }, function (status) {
-            $scope.pageMessage = status;
-            $timeout(clearMessage, 2000);
-            $scope.searching = false;
-            $scope.searchReturn = false;
-          });
-      }
-    }, true);
+    var findBooks = function(value) {
+      $scope.searchResults = bookService.searchBooks(value);
+      $scope.searching = true;
+      $scope.searchResults.then(function (books) {
+        $scope.searchResults = JSON.parse(books);
+        $scope.searching = false;
+        $scope.searchReturn = true;
+      }, function (status) {
+        $scope.pageMessage = status;
+        $timeout(clearMessage, 2000);
+        $scope.searching = false;
+        $scope.searchReturn = false;
+      });
+    };
+
+  var _timeout;
+
+  $scope.inputFocus = function () {
+    $timeout(function() {
+      var element = $window.document.getElementById('search-input');
+      if (element)
+        element.focus();
+    });
+  };
+
+  $scope.removeSearch = function () {
+    $scope.query = '';
+    $scope.searchChanged($scope.query);
+  };
+
+  $scope.searchChanged = function (searchQuery) {
+    if(_timeout){ //if there is already a timeout in process cancel it
+      $timeout.cancel(_timeout);
+    }
+    if (searchQuery) {
+      _timeout = $timeout(function(){
+        findBooks(searchQuery);
+        _timeout = null;
+      },800);
+    } else {
+      $scope.searching = false;
+      $scope.searchReturn = false;
+      $scope.searchResults = false;
+    }
+  };
       
 
   };
