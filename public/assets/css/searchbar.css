@@ -1,28 +1,9 @@
 /***********************
- * Essential Structure *
- ***********************/
-
-.flexsearch--wrapper {
-	height: auto;
-	width: auto;
-	max-width: 100%;
-	overflow: hidden;
-	background: transparent;
-	margin: 0;
-	position: static;
-}
-	
-.flexsearch--input-wrapper {
-	overflow: hidden;
-}
-
-
-
-/***********************
  * Configurable Styles *
  ***********************/
 .flexsearch {
   padding: 0 100px;
+	overflow: hidden;
 }
 
 ::-webkit-input-placeholder {
@@ -38,19 +19,15 @@ input:-moz-placeholder {
  ***********************/
 
 .advancedSearchBox {
-    display: block;
-    position: relative;
-    margin: 5px 0 10px 0;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    -webkit-border-radius: 4px;
-    -moz-border-radius: 4px;
-    min-height: 40px;
-    padding: 0 9px;
-    background-color: #fff;
-    cursor: text;
-    line-height: 38px;
-  width: 100%;
+  display: block;
+  position: relative;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  min-height: 40px;
+  padding: 0 9px;
+  background-color: #fff;
+  cursor: text;
+  line-height: 38px;
   padding: 0 15px;
 	border-color: #888;
   border-radius: 35px; /* (height/2) + border-width */
@@ -80,8 +57,8 @@ input:-moz-placeholder {
     }
 
     .advancedSearchBox .search-input {
+        width: 90%;
         display: inline-block;
-        width: auto;
         background-color: inherit;
         border: 0;
     }
