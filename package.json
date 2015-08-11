@@ -4,7 +4,7 @@
   "description": "Book review site for the end of the world",
   "main": "server.js",
   "scripts": {
-    "start": "supervisor -e 'html|js' node server.js"
+    "start": "supervisor -e 'html|js|css' node server.js"
   },
   "keywords": [
     "book",

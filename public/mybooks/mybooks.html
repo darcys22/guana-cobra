@@ -6,21 +6,29 @@
 
   <br>
 
-  <ul class="booksearch container" ng-show="searching">
-    <li class="thumbnail">
-      <img ng-src="assets/images/preloader.gif" alt="preloader" class="loader" ></img>
+  <ul class="ca-menu" ng-show="searching">
+    <li>
+      <div class="ca-content">
+        <img ng-src="assets/images/preloader.gif" alt="preloader" class="loader" ></img>
+    </div>
     </li>
   </ul>
 
 
-  <ul class="booksearch container" ng-show="searchReturn">
-    <li ng-repeat="book in searchResults" class="thumbnail"  >
-      <a ng-click="addBook(book.ID)">{{book.Title}}</a>
-      <p>{{book.Author}}</p>
+  <ul class="ca-menu" ng-show="searchReturn">
+    <li ng-repeat="book in searchResults">
+      <a ng-click="addBook(book.ID)">
+        <span class="ca-icon glyphicon glyphicon-heart"></span>
+        <div class="ca-content">
+          <h2 class="ca-main" title="{{book.Title}}"> {{book.Title}} </h2>
+          <h3 class="ca-sub" > {{book.Author}}</h3>
+        </div>
+      </a>
     </li>
   </ul> 
 
-  <div ng-hide="searchReturn">
+  <!--<div ng-hide="searchReturn">-->
+  <div>
     <div class="pgn">
       <view-selecter></view-selecter>
       <img ng-show="loading" ng-src="assets/images/preloader.gif" alt="preloader" class="loader"></img>
