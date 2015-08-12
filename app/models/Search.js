@@ -10,10 +10,16 @@
   });
 
   var responseBuilder = function (amazonBook) {
+      var author;
+      //Kindles have creator instead of Author so it would return an undefined error
+      try { author = amazonBook.ItemAttributes[0].Author[0] 
+      } catch(e) {
+        author = amazonBook.ItemAttributes[0].Creator[0]._
+      }
       return {
         //URL:      amazonBook.DetailPageURL[0], //String of Link to amazon
         Title:    amazonBook.ItemAttributes[0].Title[0], //String of Title
-        Author:   amazonBook.ItemAttributes[0].Author[0], //String of Author
+        Author:   author, //String of Author
         ID:   amazonBook.ASIN[0], //AMAZON STANDARD IDENTIFICATION NUMBER
         //Img:      amazonBook.LargeImage[0].URL[0] //ImageURL
       }
@@ -56,7 +62,11 @@
             } else if (results.ItemSearchResponse.Items[0].TotalResults[0] == '0') {
               callback('No Results');
             } else {
-              callback(null, jsBuilder(arrayLocator(results)));
+              try {
+                callback(null, jsBuilder(arrayLocator(results)));
+              } catch(e) {
+                callback(e);
+              }
             }
         });
 
