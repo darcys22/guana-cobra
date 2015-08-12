@@ -4,7 +4,8 @@
           <tr>
             <!--TODO Put something here for deleteing in the mybooks section and removing the "rankness"-->
             <!--<th data-ng-click="setOrder('id')">Rank</th>-->
-            <th data-ng-click="setOrder('id')">Rank</th>
+            <th ng-if="location.path() == '/hordemind'" data-ng-click="setOrder('id')">Rank</th>
+            <th ng-if="location.path() != '/hordemind'">Delete</th>
             <th data-ng-click="setOrder('title')">Name</th>
             <th data-ng-click="setOrder('author')">Author</th>
             <th>&nbsp;</th>
@@ -12,8 +13,11 @@
         </thead>
         <tbody>
         <tr data-ng-repeat="bk in books | orderBy:orderby:reverse" class="repeat-animation">
-          <td data-th="Rank">{{bk.id}}</td>
-          <td data-th="Title"><a href="#/customeredit/">{{bk.title}}</a></td>
+          <td ng-if="location.path() == '/hordemind'" data-th="Rank">{{bk.id}}</td>
+          <td ng-if="location.path() != '/hordemind'">
+            <span ng-click="deleteBook(bk._id)"class="del noselect">&#10006;</span>
+          </td>
+          <td data-th="Title"> <a ng-href="{{bk.url}}" target="_blank">{{bk.title}}</a></td>
           <td data-th="Author">{{bk.author}}</td>
           <td></td>
           <!--<td><button class="btn btn-danger" data-ng-click="vm.deleteCustomer(customer.id)">Delete</button></td>-->
