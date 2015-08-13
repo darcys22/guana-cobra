@@ -48,15 +48,35 @@
 
         </ul>
 
-        <ul class="nav navbar-nav navbar-right">
-          <li class="dropdown">
-            <a href="" class="dropdown-toggle glyphicon glyphicon-envelope" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"></span></a>
-            <ul class="dropdown-menu">
+        <ul class="nav navbar-nav navbar-right" ng-controller="modalCtrl">
+
+<script type="text/ng-template" id="myModalContent.html">
+    <div class="modal-header">
+        <h3 class="modal-title">I'm a modal!</h3>
+    </div>
+    <div class="modal-body">
+        <ul>
+            <li ng-repeat="item in items">
+                <a href="#" ng-click="$event.preventDefault(); selected.item = item">{{ item }}</a>
+            </li>
+        </ul>
+        Selected: <b>{{ selected.item }}</b>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
+        <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+    </div>
+</script>
+
+          <li dropdown>
+            <a href class="dropdown-toggle glyphicon glyphicon-envelope" dropdown-toggle role="button" aria-haspopup="true" aria-expanded="false">
+            </a>
+            <ul class="dropdown-menu" >
               <li>
-                <a href="#/email">Add Email Address</a>
+                <a ng-click="open()">Add Email Address</a>
               </li>
               <li>
-                <a href="#/recover">Recover Books</a>
+                <a ng-click="open()">Recover Books</a>
               </li>
             </ul>
           </li>
@@ -84,6 +104,7 @@
   <script src="services/parentcontroller.js"></script>
   <script src="services/trusted.js"></script>
   <script src="services/directives.js"></script>
+  <script src="services/modals.js"></script>
   <script src="partials/partialdirectives.js"></script>
   <script src="assets/js/ui-bootstrap-tpls-0.13.0.min.js"></script>
   

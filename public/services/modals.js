@@ -1,8 +1,8 @@
 (function () {
 
-  var injectParams = [$scope, $modal, $log];
+  var injectParams = ['$scope', '$modal', '$log'];
 
-  var modal = function () {
+  var modal = function ($scope, $modal, $log) {
 
     $scope.items = ['item1', 'item2', 'item3'];
 
@@ -36,13 +36,13 @@
   };
 
   modal.$inject = injectParams;
-  angular.module('myApp').controller('modal', modal);
+  angular.module('myApp').controller('modalCtrl', modal);
 
 
 
 
-  var instanceInjectParams = [ $scope, $modalInstance, items ];
-  var modalInstance = function () {
+  var instanceInjectParams = [ '$scope', '$modalInstance', 'items'];
+  var modalInstance = function ($scope, $modalInstance, items) {
 
     $scope.items = items;
     $scope.selected = {
@@ -56,7 +56,7 @@
     $scope.cancel = function () {
       $modalInstance.dismiss('cancel');
     };
-  });
+  };
 
   modalInstance.$inject = instanceInjectParams;
   angular.module('myApp').controller('ModalInstanceCtrl', modalInstance);
