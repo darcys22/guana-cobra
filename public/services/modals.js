@@ -5,13 +5,13 @@
   var modal = function ($scope, $modal, $log) {
 
     var content = {
-      'recover': {
-        'title'   : 'Recover Your Books',
-        'content' : 'Something Something Dark Side;
+      recover: {
+        title   : 'Recover Your Books',
+        content : 'Something Something Dark Side'
       },
-      'addEmail': {
-        'title'   : 'Add Your Email',
-        'content' : 'Something Something Dark Side;
+      addEmail: {
+        title   : 'Add Your Email',
+        content : 'Something Something Dark Side'
       }
     };
 
@@ -26,8 +26,8 @@
         templateUrl: '/../partials/modal.html',
         controller: 'ModalInstanceCtrl',
         resolve: {
-          content: function () {
-            return content[direction]
+          contents: function () {
+            return content[direction];
           }
         }
       });
@@ -49,8 +49,11 @@
 
 
 
-  var instanceInjectParams = [ '$scope', '$modalInstance'];
-  var modalInstance = function ($scope, $modalInstance) {
+  var instanceInjectParams = [ '$scope', '$modalInstance', 'contents'];
+  var modalInstance = function ($scope, $modalInstance, contents) {
+    console.log(contents)
+
+    $scope.content = contents;
 
     $scope.ok = function () {
       $modalInstance.close($scope.email);
