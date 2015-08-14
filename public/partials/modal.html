@@ -1,0 +1,14 @@
+<form name="emailForm" novalidate
+  ng-submit="ok()">
+  <div class="modal-header">
+    <h3 class="modal-title">{{content.title}}</h3>
+  <div class="modal-body">
+    {{content.content}}
+        <label for="email">Email:</label>
+        <input type="email" class="form-control" name="email" id="email" ng-model="email" required>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-warning" type="button"  ng-click="cancel()">Close</button>
+    <button class="btn btn-primary" type="submit" ng-disabled="!emailForm.$valid">Submit</button>
+  </div>
+</form>

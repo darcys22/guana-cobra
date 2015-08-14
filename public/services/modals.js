@@ -4,16 +4,31 @@
 
   var modal = function ($scope, $modal, $log) {
 
+    var content = {
+      'recover': {
+        'title'   : 'Recover Your Books',
+        'content' : 'Something Something Dark Side;
+      },
+      'addEmail': {
+        'title'   : 'Add Your Email',
+        'content' : 'Something Something Dark Side;
+      }
+    };
+
     $scope.email = '';
 
     $scope.animationsEnabled = true;
 
-    $scope.openRecovery = function () {
+    $scope.open = function (direction) {
 
       var modalInstance = $modal.open({
         animation: $scope.animationsEnabled,
-        templateUrl: '/../partials/recoverModal.html',
-        controller: 'ModalInstanceCtrl'
+        templateUrl: '/../partials/modal.html',
+        controller: 'ModalInstanceCtrl',
+        resolve: {
+          content: function () {
+            return content[direction]
+          }
         }
       });
 
@@ -22,22 +37,6 @@
       });
     };
     
-    $scope.openNewEmail = function () {
-
-      var modalInstance = $modal.open({
-        animation: $scope.animationsEnabled,
-        templateUrl: '/../partials/newEmailModal.html',
-        controller: 'ModalInstanceCtrl'
-        }
-      });
-
-      modalInstance.result.then(function (selectedItem) {
-        $scope.selected = selectedItem;
-      }, function () {
-        $log.info('Modal dismissed at: ' + new Date());
-      });
-    }
-
     $scope.toggleAnimation = function () {
       $scope.animationsEnabled = !$scope.animationsEnabled;
     };
