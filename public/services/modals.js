@@ -7,11 +7,17 @@
     var content = {
       recover: {
         title   : 'Recover Your Books',
-        content : 'Something Something Dark Side'
+        content : 'Something Something Dark Side',
+        result  : function (email) {
+          console.log(email);
+        }
       },
       addEmail: {
         title   : 'Add Your Email',
-        content : 'Something Something Dark Side'
+        content : 'Something Something Dark Side',
+        result  : function (email) {
+          console.log(email);
+        }
       }
     };
 
@@ -32,9 +38,7 @@
         }
       });
 
-      modalInstance.result.then(function (email) {
-        console.log(email);
-      });
+      modalInstance.result.then(content[direction].result);
     };
     
     $scope.toggleAnimation = function () {
