@@ -55,7 +55,6 @@
 
   var instanceInjectParams = [ '$scope', '$modalInstance', 'contents'];
   var modalInstance = function ($scope, $modalInstance, contents) {
-    console.log(contents)
 
     $scope.content = contents;
 
