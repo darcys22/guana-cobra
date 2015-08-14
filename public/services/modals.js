@@ -4,42 +4,30 @@
 
   var modal = function ($scope, $modal, $log) {
 
-    $scope.items = ['item1', 'item2', 'item3'];
+    $scope.email = '';
 
     $scope.animationsEnabled = true;
 
-    $scope.openRecovery = function (size) {
+    $scope.openRecovery = function () {
 
       var modalInstance = $modal.open({
         animation: $scope.animationsEnabled,
         templateUrl: '/../partials/recoverModal.html',
-        controller: 'ModalInstanceCtrl',
-        size: size,
-        resolve: {
-          items: function () {
-            return $scope.items;
-          }
+        controller: 'ModalInstanceCtrl'
         }
       });
 
-      modalInstance.result.then(function (selectedItem) {
-        $scope.selected = selectedItem;
-      }, function () {
-        $log.info('Modal dismissed at: ' + new Date());
+      modalInstance.result.then(function (email) {
+        console.log(email);
       });
     };
     
-    $scope.openNewEmail = function (size) {
+    $scope.openNewEmail = function () {
 
       var modalInstance = $modal.open({
         animation: $scope.animationsEnabled,
         templateUrl: '/../partials/newEmailModal.html',
-        controller: 'ModalInstanceCtrl',
-        size: size,
-        resolve: {
-          items: function () {
-            return $scope.items;
-          }
+        controller: 'ModalInstanceCtrl'
         }
       });
 
@@ -62,16 +50,11 @@
 
 
 
-  var instanceInjectParams = [ '$scope', '$modalInstance', 'items'];
-  var modalInstance = function ($scope, $modalInstance, items) {
-
-    $scope.items = items;
-    $scope.selected = {
-      item: $scope.items[0]
-    };
+  var instanceInjectParams = [ '$scope', '$modalInstance'];
+  var modalInstance = function ($scope, $modalInstance) {
 
     $scope.ok = function () {
-      $modalInstance.close($scope.selected.item);
+      $modalInstance.close($scope.email);
     };
 
     $scope.cancel = function () {
