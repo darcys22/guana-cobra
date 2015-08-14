@@ -1,22 +1,25 @@
 (function () {
 
-  var injectParams = ['$scope', '$modal', '$log'];
+  var injectParams = ['$scope', '$rootScope', '$modal', '$log', '$cookies', 'bookService'];
 
-  var modal = function ($scope, $modal, $log) {
+  var modal = function ($scope, $rootScope, $modal, $log, $cookies, bookService) {
 
     var content = {
       recover: {
         title   : 'Recover Your Books',
         content : 'Something Something Dark Side',
         result  : function (email) {
-          console.log(email);
+          var cookie = bookService.recoverBooks(email);
+          cookie.then(
+            $cookies.put('current.user', cookie, {'expires': expireDate})
+          )
         }
       },
       addEmail: {
         title   : 'Add Your Email',
         content : 'Something Something Dark Side',
         result  : function (email) {
-          console.log(email);
+          bookService.addEmail($rootScope.userId, email);
         }
       }
     };
