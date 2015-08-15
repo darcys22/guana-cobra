@@ -39,6 +39,16 @@ module.exports = function(app) {
     });
   });
 
+  app.post('/api/users/:userId/email/', function(req, res) {
+    console.log(req.body);
+    res.send(req.body);
+  });
+
+  app.post('/api/recover/', function(req, res) {
+    console.log(req.body);
+    res.send("55c87f9d3430c68f389fa67f");
+  });
+
   app.post('/api/users/:id/books', function(req, res) {
     var User = require('./models/User.js');
     User.findOrCreate({id: req.params.id}, function(err, currentUser, created) {

@@ -9,14 +9,19 @@
         title   : 'Recover Your Books',
         content : 'Something Something Dark Side',
         result  : function (email) {
-          console.log(email)
+          var cookie = bookService.recoverBooks(email);
+          cookie.then(
+            var expireDate = new Date();
+            expireDate.setDate(expireDate.getDate() + 365 * 10);
+            $cookies.put('current.user', cookie, {'expires': expireDate})
+          )
         }
       },
       addEmail: {
         title   : 'Add Your Email',
         content : 'Something Something Dark Side',
         result  : function (email) {
-          console.log(email)
+          bookService.addEmail($rootScope.userId, email);
         }
       }
     };
