@@ -78,7 +78,7 @@ module.exports = function(app) {
   });
   
   app.post('/api/search', function(req, res) {
-    var Search = require('./controllers/Search.js');
+    var Search = require('./models/Search.js');
     Search(req.body, function(error, data) {
       if (error) {
         console.debug('Search: ' + err);
