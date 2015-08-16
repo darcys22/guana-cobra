@@ -7,7 +7,7 @@
     var content = {
       recover: {
         title   : 'Recover Your Books',
-        content : 'This actually doesnt do anything yet, will return my personal ID and you can mess around with mine',
+        content : 'If you had previously entered an email address, you can enter it here to recover your cookie after wiping',
         result  : function (email) {
           var cookie = bookService.recoverBooks(email);
           cookie.then( function(newCookie) {
