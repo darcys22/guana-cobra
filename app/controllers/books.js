@@ -1,9 +1,17 @@
 (function () {
 
+  var Book = require('./../models/Book.js');
+
   module.exports = {
 
     topBooks: function(req, res) {
-      res.sendFile('./app/models/generated.json');
+      Book
+      .find({})
+      .sort({'votes': -1})
+      .limit(100)
+      .exec(function(err, books) {
+        res.send(books);
+      });
     },
 
     searchBooks: function(req, res) {
