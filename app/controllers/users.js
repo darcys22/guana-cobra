@@ -1,9 +1,10 @@
-module.exports = function() {
+(function () {
 
-  return {
+  var User = require('./../models/User.js');
 
-    getBooks: return function(req, res) {
-      var User = require('./models/User.js');
+  module.exports = {
+
+    getBooks: function(req, res) {
       User
       .findOne({id: req.params.id})
       .populate('books')
@@ -20,18 +21,17 @@ module.exports = function() {
       });
     },
 
-    addEmail: return function(req, res) {
+    addEmail: function(req, res) {
       console.log(req.body);
       res.send(req.body);
-    }
+    },
 
-    recoverCookie: return  function(req, res) {
+    recoverCookie: function(req, res) {
       console.log(req.body);
       res.send("1753519376684165");
     },
 
-    addBook: return function(req, res) {
-      var User = require('./models/User.js');
+    addBook: function(req, res) {
       User.findOrCreate({id: req.params.id}, function(err, currentUser, created) {
         if (err) {
           console.debug('FindorCreate: ' + err);
@@ -44,8 +44,7 @@ module.exports = function() {
       });
     },
 
-    deleteBook: return function(req, res) {
-      var User = require('./models/User.js');
+    deleteBook: function(req, res) {
       User.findOne({id: req.params.id}, function(err, currentUser) {
         if (err) {
           console.debug('DeleteFindUser: ' + err);
@@ -57,6 +56,7 @@ module.exports = function() {
         });
       });
     }
-  }
-  
-};
+  };
+ 
+}());
+

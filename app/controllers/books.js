@@ -1,12 +1,12 @@
-module.exports = function() {
+(function () {
 
-  return {
+  module.exports = {
 
-    topBooks: return function(req, res) {
+    topBooks: function(req, res) {
       res.sendfile('./app/models/generated.json');
     },
 
-    searchBooks: return function(req, res) {
+    searchBooks: function(req, res) {
       var Search = require('./Search.js');
       Search(req.body, function(error, data) {
         if (error) {
@@ -18,4 +18,6 @@ module.exports = function() {
       });
     }
   }
-};
+
+}());
+
