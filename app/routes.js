@@ -1,7 +1,8 @@
 module.exports = function(app) {
 
   var users = require('./controllers/users.js'),
-      books = require('./controllers/books.js');
+      books = require('./controllers/books.js'),
+      path  = require('path');
 
   // Routes =================================================================
 
@@ -18,6 +19,10 @@ module.exports = function(app) {
   app.delete('/api/users/:id/books/:bookid', users.deleteBook);
   
   app.post('/api/search', books.searchBooks);
+
+  app.get('/api/story', function(req, res) {
+    res.sendFile(path.join(__dirname, 'story.txt'));
+  });
 
 
 	// frontend routes =========================================================
