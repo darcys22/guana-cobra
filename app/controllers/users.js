@@ -27,7 +27,7 @@ module.exports = function() {
 
     recoverCookie: return  function(req, res) {
       console.log(req.body);
-      res.send("55c87f9d3430c68f389fa67f");
+      res.send("1753519376684165");
     },
 
     addBook: return function(req, res) {

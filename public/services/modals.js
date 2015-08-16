@@ -10,11 +10,11 @@
         content : 'Something Something Dark Side',
         result  : function (email) {
           var cookie = bookService.recoverBooks(email);
-          cookie.then(
+          cookie.then( function(newCookie) {
             var expireDate = new Date();
             expireDate.setDate(expireDate.getDate() + 365 * 10);
-            $cookies.put('current.user', cookie, {'expires': expireDate})
-          )
+            $cookies.put('current.user', newCookie, {'expires': expireDate})
+          })
         }
       },
       addEmail: {

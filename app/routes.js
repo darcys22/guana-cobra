@@ -46,7 +46,7 @@ module.exports = function(app) {
 
   app.post('/api/recover/', function(req, res) {
     console.log(req.body);
-    res.send("55c87f9d3430c68f389fa67f");
+    res.send("1753519376684165");
   });
 
   app.post('/api/users/:id/books', function(req, res) {
