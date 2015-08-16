@@ -3,7 +3,7 @@
   module.exports = {
 
     topBooks: function(req, res) {
-      res.sendfile('./app/models/generated.json');
+      res.sendFile('./app/models/generated.json');
     },
 
     searchBooks: function(req, res) {
