@@ -7,7 +7,7 @@
     var content = {
       recover: {
         title   : 'Recover Your Books',
-        content : 'Something Something Dark Side',
+        content : 'This actually doesnt do anything yet, will return my personal ID and you can mess around with mine',
         result  : function (email) {
           var cookie = bookService.recoverBooks(email);
           cookie.then( function(newCookie) {
@@ -19,7 +19,7 @@
       },
       addEmail: {
         title   : 'Add Your Email',
-        content : 'Something Something Dark Side',
+        content : 'HumanRestart.com uses a cookie to store your ID, this means that it can easily be lost by deleting browser data. To allow recovery of your books after wiping please add an email address to your account',
         result  : function (email) {
           bookService.addEmail($rootScope.userId, email);
         }
