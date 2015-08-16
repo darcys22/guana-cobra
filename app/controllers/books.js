@@ -1,99 +1,21 @@
-module.exports = function(app) {
+module.exports = function() {
 
-	// server routes ===========================================================
-	// handle things like api calls
-	// authentication routes
-  //
-  ////         Resource        Get         post         put        Delete
-  //
-  ////         Top        Return top books  405         405        405
-  ////         users          405     Create new user   405        405
-  ////         users:id   Return user books        Updates Book List
-  //                                    adds new book              Deletes
-  ////         Search     Return Search
-  //
-  ////         blacklist  Return blacklist  add to blacklist      remove from blacklist
-  ////         graylist     ""                    ""                  ""  
-  //
-  //POST  /magazines/:magazine_id/ads   ads#create  create a new ad belonging to a specific magazine
+  return {
 
-  app.get('/api/top', function(req, res) {
-    res.sendfile('./app/models/generated.json');
-  });
+    topBooks: return function(req, res) {
+      res.sendfile('./app/models/generated.json');
+    },
 
-  app.get('/api/users/:id/books', function(req, res) {
-    var User = require('./models/User.js');
-    User
-    .findOne({id: req.params.id})
-    .populate('books')
-    .exec(function (err, currentUser) {
-      if (err) {
-        console.debug('Within FindOneUser: ' + err);
-        res.status(500).send(err);
-      } else if (currentUser == null) {
-        console.log('currentUser = null');
-        res.send([]);
-      } else {
-        res.send(currentUser.books);
-      };
-    });
-  });
-
-  app.post('/api/users/:userId/email/', function(req, res) {
-    console.log(req.body);
-    res.send(req.body);
-  });
-
-  app.post('/api/recover/', function(req, res) {
-    console.log(req.body);
-    res.send("55c87f9d3430c68f389fa67f");
-  });
-
-  app.post('/api/users/:id/books', function(req, res) {
-    var User = require('./models/User.js');
-    User.findOrCreate({id: req.params.id}, function(err, currentUser, created) {
-      if (err) {
-        console.debug('FindorCreate: ' + err);
-        res.status(500).send(err);
-      }
-      var promis = currentUser.createFromAsin(req.body); 
-      promis.then(function (bklst) {
-        res.send(bklst);
+    searchBooks: return function(req, res) {
+      var Search = require('./Search.js');
+      Search(req.body, function(error, data) {
+        if (error) {
+          console.debug('Search: ' + err);
+          res.status(400).send(error);
+        } else {
+          res.json(JSON.stringify(data));
+        };
       });
-    });
-  });
-
-  app.delete('/api/users/:id/books/:bookid', function(req, res) {
-    var User = require('./models/User.js');
-    User.findOne({id: req.params.id}, function(err, currentUser) {
-      if (err) {
-        console.debug('DeleteFindUser: ' + err);
-        res.status(500).send(err);
-      }
-      var promis = currentUser.delete(req.params.bookid);
-      promis.then(function (bklst) {
-        res.send(bklst);
-      });
-    });
-  });
-  
-  app.post('/api/search', function(req, res) {
-    var Search = require('./models/Search.js');
-    Search(req.body, function(error, data) {
-      if (error) {
-        console.debug('Search: ' + err);
-        res.status(400).send(error);
-      } else {
-        res.json(JSON.stringify(data));
-      };
-    });
-  });
-
-
-	// frontend routes =========================================================
-	// route to handle all angular requests
-	app.get('*', function(req, res) {
-		res.sendfile('./public/index.html');
-	});
-
+    }
+  }
 };
