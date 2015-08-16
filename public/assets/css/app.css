@@ -34,7 +34,7 @@ body {
 }
 
 .landing {
-  color: #F0EAD6;
+  color: #D1D6E7;
 }
 
 .white {
@@ -136,6 +136,10 @@ body {
 }
 .rwd-table th, .rwd-table td:before {
   color: #dd5;
+}
+
+.angular-with-newlines {
+      white-space: pre-wrap;
 }
 
 .spinner {
