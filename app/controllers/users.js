@@ -39,8 +39,12 @@
         if (err) {
           console.log('recoverCookie: ' + err);
           res.status(500).send(err);
+        } else if (currentUser == null) {
+          console.log('currentUser = null');
+          res.status(400).send('Email does not exist in our database');
+        } else {
+          res.send(currentUser.id);
         }
-        res.send(currentUser.id);
       });
     },
 
