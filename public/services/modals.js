@@ -1,8 +1,8 @@
 (function () {
 
-  var injectParams = ['$scope', '$rootScope', '$modal', '$log', '$cookies', 'bookService'];
+  var injectParams = ['$scope', '$rootScope', '$modal', '$log', '$cookies', '$route', 'bookService'];
 
-  var modal = function ($scope, $rootScope, $modal, $log, $cookies, bookService) {
+  var modal = function ($scope, $rootScope, $modal, $log, $cookies, $route, bookService) {
 
     var content = {
       recover: {
@@ -14,6 +14,8 @@
             var expireDate = new Date();
             expireDate.setDate(expireDate.getDate() + 365 * 10);
             $cookies.put('current.user', newCookie, {'expires': expireDate})
+            $rootScope.userId = newCookie;
+            $route.reload();
           })
         }
       },

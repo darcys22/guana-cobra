@@ -10,7 +10,7 @@
       .populate('books')
       .exec(function (err, currentUser) {
         if (err) {
-          console.debug('Within FindOneUser: ' + err);
+          console.log('Within FindOneUser: ' + err);
           res.status(500).send(err);
         } else if (currentUser == null) {
           console.log('currentUser = null');
@@ -22,13 +22,26 @@
     },
 
     addEmail: function(req, res) {
-      console.log(req.body);
-      res.send(req.body);
+      User.findOne({id: req.params.id}, function(err, currentUser) {
+        currentUser.email = req.body.email;
+        currentUser.save(function (err) {
+          if (err) {
+            console.log('addEmail: ' + err);
+            res.status(500).send(err);
+          }
+          res.send(req.body);
+        });
+      });
     },
 
     recoverCookie: function(req, res) {
-      console.log(req.body);
-      res.send("1753519376684165");
+      User.findOne({email: req.body.email}, function(err, currentUser) {
+        if (err) {
+          console.log('recoverCookie: ' + err);
+          res.status(500).send(err);
+        }
+        res.send(currentUser.id);
+      });
     },
 
     addBook: function(req, res) {

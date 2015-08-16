@@ -9,7 +9,7 @@ module.exports = function(app) {
 
   app.get('/api/users/:id/books', users.getBooks);
 
-  app.post('/api/users/:userId/email/', users.addEmail);
+  app.post('/api/users/:id/email/', users.addEmail);
 
   app.post('/api/recover/', users.recoverCookie);
 
