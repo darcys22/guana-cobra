@@ -16,19 +16,19 @@ gulp.task('usemin',['templates'], function() {
       .pipe(usemin({
         //html: [revReplace({manifest: manifest}), minifyHTML({empty: true})],
         html: [revReplace({manifest: manifest})],
-        css: ['concat', rev()],
-        vendorcss: [ 'concat', rev()],
-        vendorjs: [rev()],
-        js: [rev()]
+        css: [minifyCss(), 'concat', rev()],
+        vendorcss: [minifyCss(), 'concat', rev()],
+        vendorjs: [stripDebug(), uglify(), rev()],
+        js: [stripDebug(), uglify(), rev()]
       }))
       .pipe(gulp.dest('www/'));
 });
 
 gulp.task('templates', function () {
   manifest = gulp.src(['./public/partials/*.html'])
-    //.pipe(minifyHTML({ quotes: true}))
+    .pipe(minifyHTML({ quotes: true}))
     .pipe(templates('templates.js'))
-    //.pipe(uglify())
+    .pipe(uglify())
     .pipe(rev())
     .pipe(gulp.dest('www/assets/javascript/'))
     .pipe(rev.manifest())
