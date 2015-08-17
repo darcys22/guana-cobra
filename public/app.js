@@ -1,6 +1,5 @@
 'use strict';
 
-    //'angular-advanced-searchbox',
 // Declare app level module which depends on views, and components
 var myApp = angular.module('myApp', [
     'ngRoute',
@@ -8,7 +7,8 @@ var myApp = angular.module('myApp', [
     'ui.bootstrap',
     'myApp.landing',
     'myApp.mybooks',
-    'myApp.hordemind'
+    'myApp.hordemind',
+    'templates'
 ]).
 
 config(['$routeProvider', function($routeProvider) {

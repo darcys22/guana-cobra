@@ -10,20 +10,21 @@
   <title>HumanRestart.com</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!--build:vendorcss assets/stylesheets/vendor.css-->
   <link rel="stylesheet" href="libs/html5-boilerplate/dist/css/normalize.css">
   <link rel="stylesheet" href="libs/html5-boilerplate/dist/css/main.css">
   <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/css/font-awesome.min.css">
+  <link rel="stylesheet" href="assets/css/animate.min.css">
+  <!--endbuild-->
 
-  <!--searchbar stuff-->
+  <!--build:css assets/stylesheets/style.css-->
   <link rel="stylesheet" href="assets/css/searchbar.css">
   <link rel="stylesheet" href="assets/css/dropdown.css">
-  
-  <script src="libs/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
   <link rel="stylesheet" href="assets/css/coverlist.css">
   <link rel="stylesheet" href="assets/css/app.css">
-
-<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css">
+  <!--endbuild-->
 
 
 </head>
@@ -70,12 +71,22 @@
 
   <div ng-view></div>
 
-
-  <!-- In production use: <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script> -->
+  <!--jquery-->
   <script src="//code.jquery.com/jquery-2.1.1.min.js"></script>
+  <!-- In production use: <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script> -->
   <script src="libs/angular/angular.js"></script>
+
+  <!--build:vendorjs assets/javascript/vendor.js-->
+  <script src="libs/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
   <script src="libs/angular-route/angular-route.js"></script>
-  <script src="//code.angularjs.org/1.4.3/angular-cookies.js"></script>
+  <script src="assets/js/angular-cookies.js"></script>
+  <script src="assets/js/ui-bootstrap-tpls-0.13.0.min.js"></script>
+  <!--endbuild-->
+
+  <script src="assets/js/templates.js"></script>
+  
+  <!--My Application Code-->
+  <!--build:js assets/javascript/app.js-->
   <script src="app.js"></script>
   <script src="landing/landing.js"></script>
   <script src="hordemind/hordemind.js"></script>
@@ -87,7 +98,7 @@
   <script src="services/directives.js"></script>
   <script src="services/modals.js"></script>
   <script src="partials/partialdirectives.js"></script>
-  <script src="assets/js/ui-bootstrap-tpls-0.13.0.min.js"></script>
+  <!--endbuild-->
   
 </body>
 
