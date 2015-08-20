@@ -14,8 +14,8 @@ gulp.task('build', ['clean'], function () {
         ],
         {base: 'public'})
         .pipe(plugins.if(isIndexHtml, plugins.usemin({
-            //js: [plugins.ngAnnotate(), plugins.uglify(), plugins.rev()],
-            js: [plugins.ngAnnotate(), plugins.rev()],
+            html: [plugins.minifyHtml({empty: true})],
+            js: [plugins.ngAnnotate(), plugins.stripDebug(), plugins.uglify(), plugins.rev()],
             vendorjs: [plugins.rev()],
             vendorcss: [plugins.minifyCss(), 'concat', plugins.rev()],
             css: [plugins.minifyCss(), 'concat', plugins.rev()],
@@ -39,5 +39,8 @@ gulp.task('build', ['clean'], function () {
 gulp.task('clean', function() {
     return gulp.src('www/*')
         .pipe(vinylPaths(del));
+});
+
+gulp.task('default', ['build'], function() {
 });
 

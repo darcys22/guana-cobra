@@ -36,7 +36,7 @@
 
       var modalInstance = $modal.open({
         animation: $scope.animationsEnabled,
-        templateUrl: '/../partials/modal.html',
+        templateUrl: 'partials/modal.html',
         controller: 'ModalInstanceCtrl',
         resolve: {
           contents: function () {
