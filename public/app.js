@@ -7,8 +7,8 @@ var myApp = angular.module('myApp', [
     'ui.bootstrap',
     'myApp.landing',
     'myApp.mybooks',
-    'myApp.hordemind',
-    'templates'
+    'myApp.hordemind'
+    //'templates'
 ]).
 
 config(['$routeProvider', function($routeProvider) {

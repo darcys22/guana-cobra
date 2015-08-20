@@ -22,7 +22,7 @@
   angular.module('myApp.hordemind', ['ngRoute'])
     .config(['$routeProvider', function($routeProvider) {
         $routeProvider.when('/hordemind', {
-              templateUrl: 'hordemind/hordemind.html',
+              templateUrl: 'partials/hordemind.html',
               controller: 'HordemindController'
             });
     }])

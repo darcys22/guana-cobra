@@ -111,7 +111,7 @@
   angular.module('myApp.mybooks', ['ngRoute'])
     .config(['$routeProvider', function($routeProvider) {
         $routeProvider.when('/mybooks', {
-              templateUrl: 'mybooks/mybooks.html',
+              templateUrl: 'partials/mybooks.html',
               controller: 'MybooksController'
             });
     }])

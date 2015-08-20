@@ -1,53 +1,43 @@
 var gulp = require('gulp');
-var stripDebug = require('gulp-strip-debug');
+var gulpLoadPlugins = require('gulp-load-plugins');
+var plugins = gulpLoadPlugins();
 var del = require('del');
 var vinylPaths = require('vinyl-paths');
-var templates = require('gulp-angular-templatecache');
-var usemin = require('gulp-usemin');
-var uglify = require('gulp-uglify');
-var minifyHTML = require('gulp-minify-html');
-var minifyCss = require('gulp-minify-css');
-var rev = require('gulp-rev');
-var revReplace = require('gulp-rev-replace');
-var manifest;
 
-gulp.task('usemin',['templates'], function() {
-  gulp.src('./public/index.html')
-      .pipe(usemin({
-        //html: [revReplace({manifest: manifest}), minifyHTML({empty: true})],
-        html: [revReplace({manifest: manifest})],
-        css: ['concat', rev()],
-        vendorcss: [ 'concat', rev()],
-        vendorjs: [rev()],
-        js: [rev()]
-      }))
-      .pipe(gulp.dest('www/'));
-});
 
-gulp.task('templates', function () {
-  manifest = gulp.src(['./public/partials/*.html'])
-    //.pipe(minifyHTML({ quotes: true}))
-    .pipe(templates('templates.js'))
-    //.pipe(uglify())
-    .pipe(rev())
-    .pipe(gulp.dest('www/assets/javascript/'))
-    .pipe(rev.manifest())
-});
+gulp.task('build', ['clean'], function () {
+    return gulp.src(
+        [
+            'public/index.html',
+            'public/assets/images/**/*',
+            'public/assets/fonts/**/*'
+        ],
+        {base: 'public'})
+        .pipe(plugins.if(isIndexHtml, plugins.usemin({
+            //js: [plugins.ngAnnotate(), plugins.uglify(), plugins.rev()],
+            js: [plugins.ngAnnotate(), plugins.rev()],
+            vendorjs: [plugins.rev()],
+            vendorcss: [plugins.minifyCss(), 'concat', plugins.rev()],
+            css: [plugins.minifyCss(), 'concat', plugins.rev()],
+            templateCache: [
+                plugins.addSrc('public/partials/**/*.html'),
+                plugins.angularTemplatecache({
+                    module: 'myApp',
+                    root: 'partials/'
+                }),
+                'concat',
+                plugins.rev()
+            ]
+        })))
+        .pipe(gulp.dest('www/'));
 
-gulp.task('libcopy', function () {
-  gulp.src('./public/assets/images/*.*')
-    .pipe(gulp.dest('www/assets/images/'));
-
-  gulp.src('./public/assets/fonts/*.*')
-    .pipe(gulp.dest('www/assets/fonts/'));
+    function isIndexHtml (file) {
+        return file.path.match('index\\.html$');
+    }
 });
 
 gulp.task('clean', function() {
     return gulp.src('www/*')
         .pipe(vinylPaths(del));
-});
-
-gulp.task('default',['clean'], function() {
-  gulp.start('libcopy', 'usemin');
 });
 
