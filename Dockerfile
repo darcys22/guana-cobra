@@ -1,19 +1,27 @@
 FROM node:0.10
 
+WORKDIR /home
+RUN npm install -g gulp bower
 
-RUN npm install -g gulp
+RUN apt-get update \
+ && apt-get install git
 
-RUN wget --no-check-certificate https://github.com/darcys22/guana-cobra/archive/master.zip
-ADD master.zip /app/
+RUN groupadd -r node \
+ &&  useradd -r -m -g node node
 
-COPY . /app/config/
+RUN git clone https://github.com/darcys22/guana-cobra.git app
+COPY . app/config/
 
-WORKDIR /app
+RUN chown -R node:node app
+USER node
 
-RUN npm install 
-RUN gulp
+RUN cd app \
+ && npm install \
+ && bower install \
+ && gulp
 
-ENV PORT 3000  
+ENV PORT 3000
 EXPOSE 3000
 
 CMD [ "npm", "start" ]
+
