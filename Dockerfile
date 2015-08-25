@@ -6,7 +6,9 @@ RUN npm install -g gulp
 RUN wget --no-check-certificate https://github.com/darcys22/guana-cobra/archive/master.zip
 ADD master.zip /app/
 
-RUN cd /app
+COPY . /app/config/
+
+WORKDIR /app
 
 RUN npm install 
 RUN gulp
