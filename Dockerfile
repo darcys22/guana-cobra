@@ -23,7 +23,7 @@ RUN cd app \
 ENV PORT 3000
 EXPOSE 3000
 
-WORKDIR /app
+WORKDIR app
 
 CMD [ "npm", "start" ]
 
