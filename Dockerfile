@@ -1,10 +1,11 @@
 FROM node:0.10
 
 WORKDIR /home
-RUN npm install -g gulp bower
 
 RUN apt-get update \
  && apt-get install git
+
+RUN npm install -g gulp bower
 
 RUN groupadd -r node \
  &&  useradd -r -m -g node node
