@@ -11,6 +11,10 @@
     "review"
   ],
   "author": "Sean Darcy",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com:darcys22/guana-cobra.git"
+  },
   "license": "ISC",
   "dependencies": {
     "apac": "^1.0.0",
