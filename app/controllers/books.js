@@ -6,8 +6,8 @@
 
     topBooks: function(req, res) {
       Book
-      .find({})
-      .sort({'votes': -1})
+      .find({rank : {$gt : 0}})
+      .sort('rank')
       .limit(100)
       .exec(function(err, books) {
         res.send(books);

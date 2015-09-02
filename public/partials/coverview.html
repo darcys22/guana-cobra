@@ -6,7 +6,7 @@
             <div class="cover-overlay">
               <span ng-if="location.path() != '/hordemind'" ng-click="deleteBook(bk._id)"class="del noselect">&#10006;</span>
             </div>
-            <span ng-if="location.path() == '/hordemind'" class="rank">{{bk.id}}</span>
+            <span ng-if="location.path() == '/hordemind'" class="rank">{{bk.rank}}</span>
         </div>
         <a ng-href="{{bk.url}}" target="_blank">
           <strong class="Title" title="{{bk.title}}">{{bk.title}}</strong>

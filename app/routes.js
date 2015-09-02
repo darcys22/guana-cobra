@@ -8,15 +8,15 @@ module.exports = function(app) {
 
   app.get('/api/top', books.topBooks);
 
-  app.get('/api/users/:id/books', users.getBooks);
+  app.route('/api/users/:id/books')
+    .get(users.getBooks)
+    .post(users.addBook);
+
+  app.delete('/api/users/:id/books/:bookid', users.deleteBook);
 
   app.post('/api/users/:id/email/', users.addEmail);
 
   app.post('/api/recover/', users.recoverCookie);
-
-  app.post('/api/users/:id/books', users.addBook);
-
-  app.delete('/api/users/:id/books/:bookid', users.deleteBook);
   
   app.post('/api/search', books.searchBooks);
 

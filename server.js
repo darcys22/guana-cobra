@@ -3,6 +3,7 @@ var express        = require('express');
 var http           = require('http');
 var app            = express();
 var mongoose       = require('mongoose');
+//var topcalc        = require('bookcalculator');
 var bodyParser     = require('body-parser');
 var methodOverride = require('method-override');
 var favicon        = require('serve-favicon');
@@ -13,6 +14,7 @@ var favicon        = require('serve-favicon');
 var db = require('./config/db');
 
 var port = process.env.PORT || 8080; // set our port
+//topcalc(db.url);
 mongoose.connect(db.url); // connect to our mongoDB database
 
 //favicon middleware
